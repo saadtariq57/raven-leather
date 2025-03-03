@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               Int        @id @default(autoincrement())
+  fullName         String
+  email            String     @unique
+  password         String?
+  googleId         String?
+  verifyCode       String?
+  verifyCodeExpiry DateTime?
+  isVerified       Boolean?
+  orders           Order[]
+  cart             CartItem[]
+  address          Address[]
+}
+
+model Address {
+  id         Int     @id @default(autoincrement())
+  user_id    Int     @unique
+  user       User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  fullName   String
+  email     String
+  phoneNo    String
+  address    String
+  city       String
+  countryRegion    String
+} 
+
+model GuestUser {
+  session_id String     @id
+  cart       CartItem[]
+  expiresAt  DateTime
+}
+
+model Product {
+  id           Int        @id @default(autoincrement())
+  name         String
+  slug         String?     @unique
+  color        String
+  price        Int
+  sizes        Size[]
+  quantity     Int?
+  images       Image[]
+  description  String
+  status       Boolean 
+  category     String
+  allTimeSales Int?       @default(0)
+  CartItem     CartItem[]
+  OrderItem    OrderItem[]
+}
+
+model Image {
+  id           Int     @id @default(autoincrement())
+  public_id    String
+  display_name String
+  url          String
+  product_id   Int
+  product      Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
+}
+
+model Size {
+  id         Int     @id @default(autoincrement())
+  size       String
+  quantity   Int
+  product_id Int
+  product    Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
+}
+
+model CartItem {
+  id         Int        @id @default(autoincrement())
+  product_id Int
+  product    Product    @relation(fields: [product_id], references: [id], onDelete: Cascade )
+  user_id    Int?
+  user       User?      @relation(fields: [user_id], references: [id], onDelete: Cascade )
+  quantity   Int
+  size       String?
+  session_id String?
+  guestUser  GuestUser? @relation(fields: [session_id], references: [session_id], onDelete: Cascade)
+
+  @@unique([user_id, product_id, size], name: "user_product_unique")
+  @@unique([session_id, product_id, size], name: "session_product_unique")
+}
+
+model Order {
+  id            Int        @id @default(autoincrement())
+  customerName  String
+  address       String
+  email         String
+  phoneNo       String
+  city          String
+  countryRegion String
+  placedOn      DateTime
+  totalAmount   Int
+  paymentStatus String
+  user_id       Int?
+  user          User?       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  orderItems   OrderItem[]
+  orderStatus   String     @default("pending")
+}
+
+model OrderItem {
+  id         Int     @id @default(autoincrement())
+  order_id   Int
+  order      Order   @relation(fields: [order_id], references: [id], onDelete: Cascade)
+  product_id Int
+  product    Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  quantity   Int
+  size       String?
+}
+
+model Sales {
+  id      Int      @id @default(autoincrement())
+  date    DateTime
+  sales  Int
+  revenue Int
+}
