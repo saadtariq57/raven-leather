@@ -21,3 +21,5 @@ export default async function JacketsPage() {
     </div>
   );
 }
+
+export const revalidate = 1800; // ISR: Revalidate every 30 minutes

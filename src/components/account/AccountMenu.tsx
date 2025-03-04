@@ -47,13 +47,15 @@ export default function AccountMenu() {
                         </DropdownMenuItem>
                     </div>
                 ) : (
-                    <DropdownMenuItem
-                        onClick={() => router.push("/signin")}
-                        className="flex items-center space-x-2 cursor-pointer p-2"
-                    >
-                        <LogIn />
-                        <span>Sign In</span>
-                    </DropdownMenuItem>
+                    <Link href="/signin">
+
+                        <DropdownMenuItem
+                            className="flex items-center space-x-2 cursor-pointer p-2"
+                        >
+                            <LogIn />
+                            <span>Sign In</span>
+                        </DropdownMenuItem>
+                    </Link>
                 )}
             </DropdownMenuContent>
         </DropdownMenu>

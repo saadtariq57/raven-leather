@@ -2,13 +2,17 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
-import { redirect, useSearchParams } from 'next/navigation';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
 import verifyOTP from "./verifyOTP";
 import signinOTP from "./signinOTP";
+import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner";
 
 const EmailVerificationPage = () => {
+  const router = useRouter();
+
   const [otp, setOtp] = useState("");
-  const [otpSubmitted, setOtpSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
   const [error, setError] = useState("");
 
   const searchParams = useSearchParams();
@@ -16,14 +20,24 @@ const EmailVerificationPage = () => {
   const email = searchParams.get('email') as string;
 
   const handleSubmit = async () => {
-    const response = await verifyOTP(email, otp);
-    if (response) {
-      setOtpSubmitted(true);
-      setError("");
-      const response = await signinOTP(email, otp);
-      if (response) {
-        redirect("/");
+    try {
+      setIsSubmitting(true);
+      const otpVerified = await verifyOTP(email, otp);
+      if (otpVerified === false) {
+        setIsSubmitting(false);
+        setError("Invalid OTP");
       }
+      otpVerified === true && setIsOtpVerified(true);
+
+      if (otpVerified) {
+        setError("");
+        await signinOTP(email, otp);
+        window.location.href = "/";
+      }
+
+    } catch (error: any) {
+      setIsSubmitting(false);
+      setError(error.message);
     }
 
   };
@@ -33,7 +47,7 @@ const EmailVerificationPage = () => {
       <div className="mx-4">
         <div className="bg-white p-8 rounded shadow-md w-96">
           <h2 className="text-2xl font-bold text-center mb-4">Email Verification</h2>
-          {!otpSubmitted ? (
+          {!isOtpVerified ? (
             <>
               <div className="text-gray-600 text-center mb-6">
                 <span>Enter the 6-digit OTP sent to your email:</span>
@@ -45,8 +59,10 @@ const EmailVerificationPage = () => {
                 placeholder="Enter OTP"
                 className="mb-4 w-full"
               />
-              <Button onClick={handleSubmit} className="w-full">Submit</Button>
-              {error && <p className="text-red-500 text-sm mt-4 text-center">{error}</p>}
+              {error && <p className="text-red-500 text-sm my-4 text-center">{error}</p>}
+              <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full">
+                {isSubmitting ? <ButtonLoadingSpinner /> : "Verify OTP"}
+              </Button>
             </>
           ) : (
             <p className="text-green-600 text-center font-medium">

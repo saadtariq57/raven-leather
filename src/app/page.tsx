@@ -3,6 +3,7 @@ import CategorySection from "@/components/landingPage/CategorySection";
 import NewArrivals from "@/components/landingPage/NewArrivals";
 import { getNewArrivals } from "@/lib/newArrivals";
 
+
 export default async function Homepage() {
   // Fetch data on the server
   const newArrivals = await getNewArrivals();
@@ -17,3 +18,5 @@ export default async function Homepage() {
     </div>
   );
 }
+
+export const revalidate = 1800; // ISR: Revalidate every 30 minutes

@@ -27,7 +27,9 @@ export const formSchema = z.object({
 
 export default function Signup() {
 
-    const [isSigningIn, setIsSigningIn] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState("");
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -39,12 +41,18 @@ export default function Signup() {
 
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        setIsSigningIn(true);
-        console.log(values)
-        const response = await signinHandler(values);
-        if(response){
-            window.location.href = "/";
+        try {
+            setIsSubmitting(true);
+            console.log(values)
+            const response = await signinHandler(values);
+            if (response) {
+                window.location.href = "/";
+            }
+        } catch (error: any) {
+            setIsSubmitting(false);
+            setError(error.message);
         }
+
     }
 
     const [showPassword, setShowPassword] = useState(false);
@@ -58,7 +66,7 @@ export default function Signup() {
                 </h2>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                        
+
                         {/* Email */}
                         <FormField
                             control={form.control}
@@ -110,9 +118,18 @@ export default function Signup() {
                             )}
                         />
 
+                        <div className="w-full flex justify-end">
+                            <Link href="/forgot-password" className="text-sm text-blue-500 hover:underline">
+                                Forgot Password?
+                            </Link>
+                        </div>
+
+                        {/* Error Message */}
+                        {error && <p className="text-sm text-center text-red-500">{error}</p>}
+
                         {/* Sign In Button */}
-                        <Button type="submit" className="w-full" disabled={isSigningIn}>
-                            {isSigningIn ? <ButtonLoadingSpinner /> : "Sign In"}
+                        <Button type="submit" className="w-full" disabled={isSubmitting}>
+                            {isSubmitting ? <ButtonLoadingSpinner /> : "Sign In"}
                         </Button>
                     </form>
                 </Form>
@@ -138,9 +155,9 @@ export default function Signup() {
                     onClick={() => signIn("google")}
                     variant="outline"
                     className="w-full mt-4"
-                    disabled={isSigningIn}
+                    disabled={isSubmitting}
                 >
-                    
+
                     <Image
                         src="/assets/google.png"
                         alt="Google"

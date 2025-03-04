@@ -20,6 +20,7 @@ import Image from "next/image"
 import Link from "next/link"
 import signupHandler from "./signupHandler"
 import { useRouter } from "next/navigation"
+import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner"
 
 export const formSchema = z.object({
     fullName: z.string().min(2, {
@@ -32,6 +33,8 @@ export const formSchema = z.object({
 export default function Signup() {
 
     const router = useRouter();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState("");
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -45,15 +48,22 @@ export default function Signup() {
 
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values);
-        
-        const response = await signupHandler(values);
-        if (response) {
-            console.log("redirectUrl: ", response.redirectUrl);
-            router.push(response.redirectUrl);
+        try {
+            setIsSubmitting(true);
+            // Do something with the form values.
+            // ✅ This will be type-safe and validated.
+            console.log(values);
+
+            const response = await signupHandler(values);
+            if (response) {
+                console.log("redirectUrl: ", response.redirectUrl);
+                router.push(response.redirectUrl);
+            }
+        } catch (error: any) {
+            setIsSubmitting(false);
+            setError(error.message);
         }
+
     }
 
     const [showPassword, setShowPassword] = useState(false);
@@ -133,9 +143,12 @@ export default function Signup() {
                             )}
                         />
 
+                        {/* Error Message */}
+                        {error && <p className="text-sm text-center text-red-500">{error}</p>}
+
                         {/* Sign Up Button */}
-                        <Button type="submit" className="w-full">
-                            Sign up
+                        <Button type="submit" className="w-full" disabled={isSubmitting}>
+                            {isSubmitting ? <ButtonLoadingSpinner /> : "Sign Up"}
                         </Button>
                     </form>
                 </Form>
@@ -161,8 +174,9 @@ export default function Signup() {
                     onClick={() => signIn("google")}
                     variant="outline"
                     className="w-full mt-4"
+                    disabled={isSubmitting}
                 >
-                    
+
                     <Image
                         src="/assets/google.png"
                         alt="Google"

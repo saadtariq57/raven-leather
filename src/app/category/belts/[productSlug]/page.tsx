@@ -20,3 +20,5 @@ export default async function ProductPage({ params }: { params: { productSlug: s
         </>
     );
 }
+
+export const revalidate = 1800; // ISR: Revalidate every 30 minutes
