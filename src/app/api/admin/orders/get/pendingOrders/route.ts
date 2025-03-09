@@ -1,4 +1,4 @@
-import { getOrderById, getPendingOrders } from "@/controllers/orderController";
+import { getPendingOrders } from "@/controllers/orderController";
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(request: NextRequest){

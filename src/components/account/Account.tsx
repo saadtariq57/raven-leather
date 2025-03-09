@@ -30,9 +30,9 @@ export default function Account({ orders, address }: { orders: OrderWithOrderIte
             <div className="flex flex-col gap-3">
               {
                 orders.length === 0 ? <p className="text-center text-gray-500">No orders found</p>
-                  : orders.map(order => {
+                  : orders.reverse().map(order => {
                     return (
-                      <div className="bg-gray-100 p-2 rounded-lg " >
+                      <div key={order.id} className="bg-gray-100 p-2 rounded-lg " >
                         <h1 className="ml-4 my-1 ">Order #{order.id}</h1>
                         <div className="p-2 w-full flex flex-col gap-2 ">
                           {

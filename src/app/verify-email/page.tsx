@@ -19,6 +19,10 @@ const EmailVerificationPage = () => {
 
   const email = searchParams.get('email') as string;
 
+  //? If the user is coming from forgot password page, we will redirect them to reset password page
+  const isForgotPassword = searchParams.get('forgotPassword') === "true";
+  console.log("isForgotPassword: ", isForgotPassword);
+
   const handleSubmit = async () => {
     try {
       setIsSubmitting(true);
@@ -29,7 +33,12 @@ const EmailVerificationPage = () => {
       }
       otpVerified === true && setIsOtpVerified(true);
 
-      if (otpVerified) {
+      if (otpVerified && isForgotPassword) {
+        router.push(`/forgot-password/reset-password?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`);
+        return;
+      }
+
+      if (otpVerified && !isForgotPassword) {
         setError("");
         await signinOTP(email, otp);
         window.location.href = "/";

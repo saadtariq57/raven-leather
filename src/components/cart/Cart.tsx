@@ -149,7 +149,6 @@ export default function Cart({ cartItems }: CartProps) {
       url = url.concat(item.toString() + "+");
     })
     url = url.slice(0, -1)
-    console.log(url);
     router.push(url);
   }
 

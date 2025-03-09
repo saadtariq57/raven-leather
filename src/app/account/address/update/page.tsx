@@ -79,7 +79,7 @@ export default function UpdateAddressPage() {
     const addressData = { ...values, user_id }
 
     try {
-      const response = await axios.post("/api/user/address/update", addressData);
+      const response = await axios.post(`/api/user/address/update?userId=${user_id}`, addressData);
       console.log("response: ", response.data);
 
       if (response.data.success) {

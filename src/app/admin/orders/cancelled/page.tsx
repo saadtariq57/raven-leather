@@ -11,7 +11,7 @@ export default function PendingOrders() {
 
     useEffect(() => {
         async function fetchOrderDetails() {
-            const response = await axios.get('/api/order/get/cancelledOrders');
+            const response = await axios.get('/api/admin/orders/get/cancelledOrders');
             setOrders(response.data.orders);
             setIsLoading(false);
             console.log(response.data);

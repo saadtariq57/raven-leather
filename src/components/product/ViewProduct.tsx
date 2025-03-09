@@ -8,6 +8,7 @@ const inter = Inter({
     
 });
 
+import { toast } from "sonner"
 import { FiMinus } from "react-icons/fi";
 import { FiPlus } from "react-icons/fi";
 import { useState } from "react";
@@ -43,6 +44,38 @@ export default function ViewProduct({ product }: { product: ProductWithImagesAnd
         if (quantity > 1) setQuantity(quantity - 1);
     };
 
+    //
+    const addToCartToast = () => {
+        toast.custom((t) => (
+            <div
+              className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
+              role="alert"
+            >
+              <Image
+                src={product.images[0].url}
+                alt={product.name}
+                width={40}
+                height={40}
+                className="w-10 h-10 object-cover rounded-md"
+              />
+              <div className="flex-1">
+                <p className="font-semibold text-gray-900 dark:text-white">
+                  Item Added to Cart
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {product.name}
+                </p>
+              </div>
+              <Button
+                onClick={() => toast.dismiss()}
+                className="ml-auto"
+              >
+                Dismiss
+              </Button>
+            </div>
+          ));
+    }
+
     const addToCart = async () => {
         setIsAddingToCart(true);
         try {
@@ -51,6 +84,7 @@ export default function ViewProduct({ product }: { product: ProductWithImagesAnd
                 // Only increment the cart if a new item is added not if an item quantity is incremented
                 setCartItemsCount( (prevCount) => prevCount + 1 )
             }
+            addToCartToast();
         } catch (error) {
             console.log("Error adding cart item: ", error);
         } finally {

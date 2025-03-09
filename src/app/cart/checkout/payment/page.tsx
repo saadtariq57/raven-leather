@@ -20,10 +20,11 @@ export default function PaymentSelection() {
     const router = useRouter();
     const totalAmount = Number(localStorage.getItem("totalAmount"));
 
-    const [selectedOption, setSelectedOption] = useState<"card" | "cod">("card");
+    const [selectedOption, setSelectedOption] = useState<"card" | "cod">("cod");
 
-    const handleOptionChange = (option: "card" | "cod") => {~
-        setSelectedOption(option);
+    const handleOptionChange = (option: "card" | "cod") => {
+        ~
+            setSelectedOption(option);
     };
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,14 +60,14 @@ export default function PaymentSelection() {
                 //Deleting cart items
                 const cartItemsIds = JSON.parse(localStorage.getItem("cartItemsIds") || "[]");
                 console.log("cartItemsIds", cartItemsIds);
-                if(cartItemsIds.length > 0){
+                if (cartItemsIds.length > 0) {
                     await axios.post('/api/cart/deleteMany', cartItemsIds);
                 }
-                localStorage.clear();                
+                localStorage.clear();
                 router.replace(`/order-confirmed?orderId=${response.data.newOrder.id}`)
 
                 // window.location.href = `/order-confirmed?orderId=${response.data.newOrder.id}`;
-                
+
             }
 
         } catch (error: AxiosError | any) {
@@ -74,6 +75,9 @@ export default function PaymentSelection() {
             console.log("Error while submitting order:", error.message);
         }
     }
+
+    const isDisabled = true; // or based on some condition
+
 
     return (
 
@@ -86,6 +90,28 @@ export default function PaymentSelection() {
                 <CardContent className="space-y-4 px-0">
                     {/* Credit/Debit Card */}
                     <div
+                        className={`flex items-center justify-between px-3 py-3 border rounded-lg 
+                        ${isDisabled ? "opacity-50 pointer-events-none cursor-not-allowed" : "cursor-pointer"} 
+                        ${selectedOption === "card" ? "border-black" : "border-gray-300"}`}
+                        onClick={!isDisabled ? () => handleOptionChange("card") : undefined}
+                    >
+                        <div className="flex items-center gap-3">
+                            <Checkbox
+                                checked={selectedOption === "card"}
+                                onCheckedChange={() => handleOptionChange("card")}
+                                className="pointer-events-none"
+                            />
+                            <Label className="text-sm">Credit/Debit Card</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <img src="/images/visa.png" alt="Visa" className="w-6" />
+                            <img src="/images/mastercard.png" alt="MasterCard" className="w-6" />
+                        </div>
+                    </div>
+
+                    {/* Credit/Debit Card Original */}
+                    {/* <div
+
                         className={`flex items-center justify-between px-3 py-3 border rounded-lg cursor-pointer ${selectedOption === "card" ? "border-black" : "border-gray-300"
                             }`}
                         onClick={() => handleOptionChange("card")}
@@ -102,7 +128,7 @@ export default function PaymentSelection() {
                             <img src="/images/visa.png" alt="Visa" className="w-6" />
                             <img src="/images/mastercard.png" alt="MasterCard" className="w-6" />
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Cash on Delivery */}
                     <div

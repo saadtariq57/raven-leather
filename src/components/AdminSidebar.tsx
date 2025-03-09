@@ -37,7 +37,7 @@ export default function AdminSidebar() {
 
     async function fetchPendingOrderCount(){
       try {
-        const response = await axios.get("/api/order/get/pendingOrderCount");
+        const response = await axios.get("/api/admin/orders/get/pendingOrderCount");
         setPendingOrderCount(response.data.orderCount);
         console.log("response: ", response.data);
       } catch (error) {

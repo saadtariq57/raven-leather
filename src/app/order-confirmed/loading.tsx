@@ -3,7 +3,7 @@
 import React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function Loading() {
+export default function OrderByIdSkeleton() {
   return (
     <div className="min-h-screen sm:pt-10 p-4">
       <div className="w-full max-w-[400px] mx-auto sm:p-3 bg-gray-50 rounded-lg shadow">

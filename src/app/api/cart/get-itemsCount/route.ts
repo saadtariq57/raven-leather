@@ -7,9 +7,6 @@ export async function GET(request: NextRequest) {
         const authjs_session = request.cookies.get("authjs.session-token")?.value;
         const session_id = request.cookies.get("session_id")?.value;
 
-        console.log("Received session_id from cookies: ", session_id);
-        console.log("Received authjs_session from cookies: ", authjs_session);
-
         if (authjs_session) {
             // Handle authenticated user
             console.log("authjs_session: ", authjs_session);

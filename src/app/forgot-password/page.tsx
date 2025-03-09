@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner";
 import forgetPasswordHandler from "./forgetPasswordHandler";
 
-const EmailVerificationPage = () => {
+const ForgotPasswordPage = () => {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -57,4 +57,4 @@ const EmailVerificationPage = () => {
   );
 };
 
-export default EmailVerificationPage;
+export default ForgotPasswordPage;

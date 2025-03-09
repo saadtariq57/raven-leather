@@ -8,6 +8,8 @@ import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import { SessionProvider } from "next-auth/react";
 import NextTopLoader from "nextjs-toploader"
+import { Toaster } from "@/components/ui/sonner"
+
 
 
 // Configure the font
@@ -59,6 +61,7 @@ export default function RootLayout({
             </main>
           </SidebarProvider>
         </SessionProvider>
+        <Toaster />
       </body>
     </html>
   );

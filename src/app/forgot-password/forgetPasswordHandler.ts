@@ -34,6 +34,6 @@ export default async function forgetPasswordHandler(email: string) {
 
     const emailSent = await SendVerificationEmail(email, OTP);
     if (emailSent) {
-        return { redirectUrl: `verify-email?email=${encodeURIComponent(email)}` };
+        return { redirectUrl: `verify-email?email=${encodeURIComponent(email)}&forgotPassword=true` };
     }
 }

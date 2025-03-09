@@ -22,7 +22,7 @@ export default async function CartPage() {
 
             <Separator className="mb-8" />
 
-            <Cart cartItems={cartItems}/>
+            <Cart cartItems={cartItems.reverse()}/>
         </div>
     );
 }

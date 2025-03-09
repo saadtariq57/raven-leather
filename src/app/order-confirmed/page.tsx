@@ -1,16 +1,29 @@
+"use client";
+import React, { useEffect, useState } from "react";
 import OrderConfirmed from "@/components/order/OrderConfirmed";
-import { getOrderById } from "@/lib/orderById";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
+import { OrderWithOrderItemsAndProduct } from "@/types/client/order.types";
+import OrderByIdSkeleton from "./loading";
 
-export default async function OrderConfirmationCard({ searchParams }: { searchParams: { orderId?: string } }) {
 
-    //Fetching order by url
-    const orderId = Number(searchParams.orderId)
+export default function OrderConfirmationCard() {
+    const searchParams = useSearchParams();
+    const orderId = Number(searchParams.get("orderId"));
     console.log("orderId", orderId);
 
-    const order = await getOrderById(orderId);
-    console.log("order: ", order);
+    const [order, setOrder] = useState<OrderWithOrderItemsAndProduct | null>(null);
 
-    return (
-        <OrderConfirmed order={order} />
-    );
+    useEffect(() => {
+        async function fetchOrder() {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/order/get/orderById?orderId=${orderId}`);
+            setOrder(response.data.order);
+        }
+        fetchOrder();
+    }, [])
+
+
+    return order ? <OrderConfirmed order={order} /> : <OrderByIdSkeleton />;
+
 }
+
