@@ -5,6 +5,7 @@ import bcryptjs from "bcryptjs"
 import { prisma } from "../DB/db.config"
 import { User } from "@/types/user.type"
 import verifyOTP from "./app/verify-email/verifyOTP"
+import { profile } from "console"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -116,13 +117,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Google({
       clientId: process.env.AUTH_GOOGLE_ID,
       clientSecret: process.env.AUTH_GOOGLE_SECRET
-    })
+    },
+    
+  )
   ],
 
   secret: process.env.AUTH_SECRET,
 
   callbacks: {
-
     signIn: async ({ user, account }) => {
 
       if (account?.provider === "google") {
@@ -130,15 +132,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         try {
           const { id, email, name } = user;
-          const userExists = await prisma.user.findUnique({
+          let dbUser = await prisma.user.findUnique({
             where: {
               email: String(email)
             }
           })
-          console.log("userExist: ", userExists);
+          console.log("userExist: ", dbUser);
 
-          if (!userExists) {
-            const newUser = await prisma.user.create({
+          if (!dbUser) {
+            dbUser = await prisma.user.create({
               data: {
                 email: String(email),
                 fullName: String(name),
@@ -146,9 +148,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 isVerified: true
               }
             })
-            console.log("New user created: ", newUser);
+            console.log("New user created: ", dbUser);
           }
 
+          //? As google OAuth session will have googleId as userId, so we need to set it to dbUser id for consistency with Credential signIn.
+          user.id = dbUser?.id.toString(); 
+          
           return true;
 
         } catch (error: any) {

@@ -21,6 +21,7 @@ import Link from "next/link"
 import signupHandler from "./signupHandler"
 import { useRouter } from "next/navigation"
 import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner"
+import { redirect } from "next/dist/server/api-utils"
 
 export const formSchema = z.object({
     fullName: z.string().min(2, {
@@ -171,7 +172,7 @@ export default function Signup() {
 
                 {/* Continue with Google */}
                 <Button
-                    onClick={() => signIn("google")}
+                    onClick={() => signIn("google", { callbackUrl: "/" })}
                     variant="outline"
                     className="w-full mt-4"
                     disabled={isSubmitting}

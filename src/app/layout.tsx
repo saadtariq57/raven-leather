@@ -54,7 +54,7 @@ export default function RootLayout({
         <SessionProvider>
           <SidebarProvider defaultOpen={false} >
             <AppSidebar />
-            <main className="w-full overflow-auto">
+            <main className="w-full">
               <LayoutWrapper>
                 {children}
               </LayoutWrapper> 

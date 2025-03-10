@@ -18,15 +18,14 @@ export function InnerLayout({ children }: { children: React.ReactNode }) {
     }
   
     if (pathname === "/admin/signin") {
-      return <div className="w-full overflow-y-hidden">{children}</div>;
+      return <div className="w-full">{children}</div>;
     }
   
     return (
-      <>
+      <div className="flex flex-col min-h-screen">
         <Navbar />
-        <main>{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
-      </>
+      </div>
     );
   }
-  

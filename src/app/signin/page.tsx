@@ -152,7 +152,7 @@ export default function Signup() {
 
                 {/* Continue with Google */}
                 <Button
-                    onClick={() => signIn("google")}
+                    onClick={() => signIn("google", { callbackUrl: "/" })}
                     variant="outline"
                     className="w-full mt-4"
                     disabled={isSubmitting}
