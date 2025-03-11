@@ -16,6 +16,8 @@ const newsreader = Newsreader({
 
 export default function Navbar() {
     const { cartItemsCount } = useCart();
+    console.log("Cart items count:", cartItemsCount);
+    
 
     return (
         <div className="sticky top-0 z-50 bg-white shadow-sm">
@@ -47,9 +49,10 @@ export default function Navbar() {
                             <span role="img" aria-label="cart">
                                 <Image
                                     src="/assets/cart.svg"
+                                    className="h-6 w-6"
                                     alt="cart"
-                                    width="25"
-                                    height="25"
+                                    width="50"
+                                    height="50"
                                 />
                                 {cartItemsCount > 0 && (
                                     <span className="absolute -top-2 -right-2 bg-black text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
