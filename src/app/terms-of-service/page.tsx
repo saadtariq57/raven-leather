@@ -23,7 +23,7 @@ export default function TermsOfService() {
           <h2>4. Google OAuth</h2>
           <p>
             We use Google OAuth for authentication purposes. By using this feature, you agree 
-            to Google's Terms of Service and Privacy Policy.
+            to Google&apos;s Terms of Service and Privacy Policy.
           </p>
           <h2>Contact Us</h2>
           <p>
