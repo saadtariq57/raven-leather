@@ -5,6 +5,8 @@ export async function getNewArrivals() {
   const baseUrl = process.env.VERCEL_URL 
     ? `https://${process.env.VERCEL_URL}` 
     : process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+
+    console.log("Fetching from URL:", `${baseUrl}/api/user/product/get/newArrivals`);
     
   try {
     const response = await axios.get(`${baseUrl}/api/user/product/get/newArrivals`);
