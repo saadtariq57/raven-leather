@@ -10,6 +10,7 @@ export default async function Homepage() {
   try {
     // Fetch data on the server
     newArrivals = await getNewArrivals();
+    console.log("New Arrivals:", newArrivals);
   } catch (error) {
     console.error("Failed to fetch new arrivals:", error);
   }
