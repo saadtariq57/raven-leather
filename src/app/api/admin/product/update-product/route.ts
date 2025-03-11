@@ -1,5 +1,4 @@
 import { updateProduct } from "@/controllers/productController"
-import authenticate_Admin_Request from "@/middlewares/adminRequestAuth";
 import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(request: NextRequest){

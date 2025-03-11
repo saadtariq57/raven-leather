@@ -1,6 +1,6 @@
 "use client";
 
-import { boolean, z } from "zod";
+import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -34,7 +34,7 @@ import {
 import { ImageUploader } from "@/components/ImageUpload";
 import { useState } from "react";
 import { UploadFile } from "antd";
-import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
+import { SelectGroup } from "@radix-ui/react-select";
 
 // Zod Schema for Form Validation
 const formSchema = z.object({
@@ -72,11 +72,6 @@ export default function AddProductDialog() {
   });
 
   const onSubmit = (data: any) => {
-    // const formattedData = {
-    //   ...data,
-    //   price: Number(data.price),
-    //   quantity: Number(data.quantity),
-    // };
 
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
@@ -186,7 +181,7 @@ export default function AddProductDialog() {
                 <FormField
                   control={form.control}
                   name="productImages"
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem>
                       <FormLabel>Product Images</FormLabel>
                       <FormControl>

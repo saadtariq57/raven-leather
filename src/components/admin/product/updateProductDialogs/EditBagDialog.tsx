@@ -33,7 +33,7 @@ import {
 import { ImageUploader } from "@/components/ImageUpload";
 import { useEffect, useState } from "react";
 import { UploadFile } from "antd";
-import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
+import { SelectGroup } from "@radix-ui/react-select";
 import axios from "axios";
 import { ProductWithImagesAndSizes } from "@/types/client/product.types";
 import LoadingSpinner from "@/components/LoadingSpinner";
@@ -116,7 +116,7 @@ export default function EditBagDialog({ productId }: { productId: number }) {
           color: productData.color,
           category: "bag",
           price: Number(productData.price),
-          quantity: productData.quantity,
+          quantity: productData.quantity ? Number(productData.quantity) : 0,
           description: productData.description,
           images: imageFiles, // Ensure images are correctly assigned
           status: productData.status,
@@ -291,7 +291,7 @@ export default function EditBagDialog({ productId }: { productId: number }) {
                   <FormField
                     control={form.control}
                     name="images"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <FormLabel>Product Images</FormLabel>
                         <FormControl>

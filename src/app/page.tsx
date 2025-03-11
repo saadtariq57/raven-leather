@@ -5,8 +5,14 @@ import { getNewArrivals } from "@/lib/newArrivals";
 
 
 export default async function Homepage() {
-  // Fetch data on the server
-  const newArrivals = await getNewArrivals();
+  let newArrivals = [];
+
+  try {
+    // Fetch data on the server
+    newArrivals = await getNewArrivals();
+  } catch (error) {
+    console.error("Failed to fetch new arrivals:", error);
+  }
 
   return (
     <div className="min-h-screen mx-auto space-y-12">

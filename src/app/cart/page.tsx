@@ -9,12 +9,11 @@ import { Separator } from "@/components/ui/separator";
 import Cart from "@/components/cart/Cart";
 import { getCartItems } from "@/lib/cartItems";
 
-export default async function CartPage() {
-    const cartItems = await getCartItems();
-    // console.log("cartItems: ", cartItems);
-    
-    
+export const dynamic = 'force-dynamic'; // Ensure dynamic rendering
 
+export default async function CartPage() {
+    const cartItems = await getCartItems() || [];    
+    
     return (
         <div className="container mx-auto px-4 py-8 min-h-screen">
             {/* Cart Header */}

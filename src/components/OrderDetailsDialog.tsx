@@ -66,7 +66,7 @@ export default function OrderDetailsDialog({ order, trigger }: OrderDetailsDialo
                                     hour12: true,
                                 })}
                             </p>
-                            <p><strong>Customer's Name:</strong> {order.customerName}</p>
+                            <p><strong>Customer&apos;s Name:</strong> {order.customerName}</p>
                             <p><strong>Phone No.:</strong> {order.phoneNo}</p>
                             <p><strong>Email:</strong> {order.email}</p>
                             <p><strong>Address:</strong> {order.address}</p>

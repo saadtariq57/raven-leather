@@ -9,7 +9,6 @@ import forgetPasswordHandler from "./forgetPasswordHandler";
 
 const ForgotPasswordPage = () => {
   const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -19,8 +18,9 @@ const ForgotPasswordPage = () => {
     try {
       setIsSubmitting(true);
       const response = await forgetPasswordHandler(email);
-      router.push(response?.redirectUrl!);
-
+      if(response){
+        router.push(response?.redirectUrl);
+      }
     } catch (error: any) {
       setIsSubmitting(false);
       setError(error.message);

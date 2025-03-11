@@ -5,7 +5,6 @@ import { userMiddleware } from "./middlewares/userMiddleware";
 import { addressMiddleware } from "./middlewares/addressMiddleware";
 import { auth } from "@/auth";
 
-// export default auth( async (req) => {
 export default async function middleware(req: NextRequest) {
     const session = await auth();
 

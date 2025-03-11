@@ -1,4 +1,3 @@
-import { Calendar, Home, icons, Inbox, Search, Settings } from "lucide-react"
 
 import {
   Sidebar,
@@ -10,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import Image from "next/image"
 
 // Menu items.
 const items = [
@@ -47,7 +47,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title} className=" mt-3">
                   <SidebarMenuButton asChild className="">
                     <a href={item.url} className="py-10 space-x-10 flex justify-center items-center">
-                    <img src={item.icon} alt={item.title} className="w-6 h-6" />
+                    <Image src={item.icon} alt={item.title} width={200} height={200} className="w-6 h-6" />
                       <span className="text-lg font-semibold">{item.title}</span>
                     </a>
                   </SidebarMenuButton>

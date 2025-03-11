@@ -1,4 +1,5 @@
 "use client"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -6,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -19,11 +19,8 @@ import Image from "next/image"
 import { redirect } from "next/navigation"
 import adminSigninHandler from "./adminSigninHandler"
 import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner"
+import { formSchema } from "./adminFormSchema"
 
-export const formSchema = z.object({
-    username: z.string(),
-    password: z.string(),
-})
 
 export default function AdminSignin() {
     const [showPassword, setShowPassword] = useState(false);

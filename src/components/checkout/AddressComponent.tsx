@@ -1,16 +1,14 @@
 "use client";
+
 import { z } from "zod";
-import { useForm, UseFormReturn } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { UseFormReturn } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner";
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const addressSchema = z.object({
   fullName: z.string().nonempty("Full Name is required"),
   email: z.string().email("Invalid email address"),
@@ -19,19 +17,18 @@ const addressSchema = z.object({
   city: z.string().nonempty("City is required"),
   countryRegion: z.string().nonempty("Country/Region is required"),
 });
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 interface AddressComponentProps {
-  form: UseFormReturn<any>; // Accept form as a prop
+  form: UseFormReturn<z.infer<typeof addressSchema>>; // Use addressSchema as form type
 }
 
 export default function AddressComponent({ form }: AddressComponentProps ) {
   const { data } = useSession();
   const router = useRouter();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const pathName = usePathname();
 
   const onSubmit = async (values: z.infer<typeof addressSchema>) => {
-    setIsSubmitting(true);
     console.log("Form Submitted: ", values);
     const user_id = Number(data?.user?.id);
     const addressData = {...values, user_id}    
@@ -51,7 +48,6 @@ export default function AddressComponent({ form }: AddressComponentProps ) {
       }
       
     } catch (error) {
-      setIsSubmitting(false)
       console.log("Error while submitting. ", error);
     }
 

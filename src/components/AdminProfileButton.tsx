@@ -1,5 +1,3 @@
-import { useState } from "react";
-import React from "react";
 import AdminLogoutDialog from "./AdminLogoutDialog";
 
 interface AdminProfileProps {

@@ -1,4 +1,5 @@
 "use client"
+
 import { Newsreader } from "next/font/google";
 const newsreader = Newsreader({
     weight: ['400', '500', '600', '700'],
@@ -15,7 +16,7 @@ const inter = Inter({
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { CartItemWithProduct } from "@/types/client/cart.types";
@@ -26,7 +27,6 @@ import ButtonLoadingSpinner from "../ButtonLoadingSpinner";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProductWithImagesAndSizes } from "@/types/client/product.types";
 import Image from "next/image";
 
 //? This form is for Guest users, if the user is logged in, the address will be fetched from the database.
@@ -46,8 +46,6 @@ interface CartProps {
 }
 
 export default function CheckoutCart({ cartItems, address }: CartProps) {
-    // console.log("address: ", address);
-
     const session = useSession();
     
     const router = useRouter();
@@ -169,8 +167,11 @@ export default function CheckoutCart({ cartItems, address }: CartProps) {
                                     <div className="flex justify-between items-center px-4 py-2 bg-gray-200 ">
                                         <span>Shipping</span>
                                         <span>
-                                            <img
+                                            <Image
                                                 src="/assets/pencil.svg"
+                                                alt="Edit Address"
+                                                width={20}
+                                                height={20}
                                                 className="size-5 cursor-pointer"
                                                 onClick={() => router.push(`/account/address/update?redirect=${encodeURIComponent(`/cart/checkout?${itemsPath}`)}`)} />
                                         </span>

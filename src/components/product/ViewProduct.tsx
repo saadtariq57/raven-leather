@@ -46,7 +46,7 @@ export default function ViewProduct({ product }: { product: ProductWithImagesAnd
 
     //
     const addToCartToast = () => {
-        toast.custom((t) => (
+        toast.custom(() => (
             <div
               className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
               role="alert"

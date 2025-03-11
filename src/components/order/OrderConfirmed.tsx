@@ -20,7 +20,7 @@ export default function OrderConfirmed({ order }: { order: OrderWithOrderItemsAn
                 {/* Header with Success Icon */}
                 <CardHeader className="text-center">
                     <div className="flex justify-center items-center gap-3 mb-3">
-                        <img src="/images/success.png" className="w-14" />
+                        <Image src="/images/success.png" width={100} height={100} alt="success" className="w-14" />
                         <CardTitle className="text-lg font-semibold">Order successfully placed!</CardTitle>
                     </div>
                     <p className="text-sm text-gray-600">Order confirmation has been sent to your email</p>

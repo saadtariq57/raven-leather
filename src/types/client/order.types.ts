@@ -1,4 +1,3 @@
-import { OrderItem, Product } from "@prisma/client";
 import { ProductInterface } from "./product.types";
 
 export interface TodayOrders {

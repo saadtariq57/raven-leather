@@ -1,7 +1,4 @@
-// /pages/category/jackets/[productSlug].tsx
-
 import ViewProduct from "@/components/product/ViewProduct";
-import { ProductWithImagesAndSizes } from "@/types/client/product.types";
 
 export default async function ProductPage({ params }: { params: { productSlug: string } }) {
     // Fetch product data based on the productSlug            

@@ -1,6 +1,3 @@
-import { OrderItem, Product } from "@prisma/client";
-import { OrderWithOrderItemsAndProduct } from "./client/order.types";
-
 export type Order = {
     orderId: string
     customerName: string

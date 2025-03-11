@@ -1,7 +1,7 @@
 import { getBestSellingProducts } from "@/controllers/productController"
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 
-export async function GET(request: NextRequest){
+export async function GET(){
     try {
         const response = await getBestSellingProducts();
         return response;

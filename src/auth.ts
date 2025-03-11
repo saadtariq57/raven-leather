@@ -5,7 +5,6 @@ import bcryptjs from "bcryptjs"
 import { prisma } from "../DB/db.config"
 import { User } from "@/types/user.type"
 import verifyOTP from "./app/verify-email/verifyOTP"
-import { profile } from "console"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [

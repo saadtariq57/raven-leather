@@ -86,7 +86,7 @@ export default function Category({ initialProducts, category, categoryName }: Pr
     };
 
     fetchSortedProducts();
-  }, [sortOption]);
+  }, [sortOption, category]);
 
   // "Load More" functionality also passes the sort option so subsequent pages follow the same order.
   const loadMoreProducts = async () => {

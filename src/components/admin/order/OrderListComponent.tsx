@@ -13,7 +13,6 @@ import { CheckCircle, Circle } from "lucide-react";
 import Image from "next/image";
 import OrderDetailsDialog from "@/components/OrderDetailsDialog";
 import { OrderWithOrderItemsAndProduct } from "@/types/client/order.types";
-import { useState } from "react";
 
 export default function OrderList( { orders, orderStatus }: { orders: OrderWithOrderItemsAndProduct[], orderStatus: string } ) {
   

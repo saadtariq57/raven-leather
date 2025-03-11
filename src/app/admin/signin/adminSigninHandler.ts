@@ -1,7 +1,7 @@
 "use server"
 import { z } from "zod";
-import { formSchema } from "./page";
-import { auth, signIn } from "@/auth";
+import { signIn } from "@/auth";
+import { formSchema } from "./adminFormSchema";
 
 export default async function adminSigninHandler(values: z.infer<typeof formSchema>) {
     const username = values.username;
@@ -13,7 +13,6 @@ export default async function adminSigninHandler(values: z.infer<typeof formSche
 
     const response = await signIn("credentials", { type: "admin" , username, password, redirect: false })
     
-
     if (response) {
         return true
     }

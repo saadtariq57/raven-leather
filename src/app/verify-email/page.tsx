@@ -1,8 +1,9 @@
 "use client"
+
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
-import { redirect, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import verifyOTP from "./verifyOTP";
 import signinOTP from "./signinOTP";
 import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner";
@@ -30,18 +31,20 @@ const EmailVerificationPage = () => {
       if (otpVerified === false) {
         setIsSubmitting(false);
         setError("Invalid OTP");
-      }
-      otpVerified === true && setIsOtpVerified(true);
+      } else {
+        setIsOtpVerified(true);
 
-      if (otpVerified && isForgotPassword) {
-        router.push(`/forgot-password/reset-password?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`);
-        return;
-      }
+        if (otpVerified && isForgotPassword) {
+          router.push(`/forgot-password/reset-password?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`);
+          return;
+        }
 
-      if (otpVerified && !isForgotPassword) {
-        setError("");
-        await signinOTP(email, otp);
-        window.location.href = "/";
+        if (otpVerified && !isForgotPassword) {
+          setError("");
+          await signinOTP(email, otp);
+          window.location.href = "/";
+        }
+        
       }
 
     } catch (error: any) {

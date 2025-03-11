@@ -4,7 +4,7 @@ import Category from '@/components/category/Category';
 
 export default async function BagsPage() {
   // Fetch the initial 20 jacket products from the database
-  let initialProducts = await prisma.product.findMany({
+  const initialProducts = await prisma.product.findMany({
     where: { category: "bag", status: true },
     take: 20,
     orderBy: { id: 'desc' },

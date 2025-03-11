@@ -34,7 +34,7 @@ import {
 import { ImageUploader } from "@/components/ImageUpload";
 import { useState } from "react";
 import { UploadFile } from "antd";
-import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
+import { SelectGroup } from "@radix-ui/react-select";
 
 // Zod Schema for Form Validation
 const formSchema = z.object({
@@ -186,7 +186,7 @@ export default function EditProductDialog() {
                 <FormField
                   control={form.control}
                   name="productImages"
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem>
                       <FormLabel>Product Images</FormLabel>
                       <FormControl>

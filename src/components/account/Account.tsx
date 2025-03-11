@@ -1,4 +1,3 @@
-//Fonts
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -38,7 +37,7 @@ export default function Account({ orders, address }: { orders: OrderWithOrderIte
                           {
                             order.orderItems.map(item => {
                               return (
-                                <div className="flex overflow-hidden bg-white shadow-md rounded-lg border">
+                                <div key={item.id} className="flex overflow-hidden bg-white shadow-md rounded-lg border">
                                   <Image
                                     src={item.product.images[0].url}
                                     width={100}

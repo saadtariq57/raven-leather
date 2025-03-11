@@ -1,10 +1,4 @@
 "use client"
-import { Newsreader } from "next/font/google";
-const newsreader = Newsreader({
-  weight: ['400', '500', '600', '700'], // Specify the weights you need
-  subsets: ['latin'],     // Specify subsets like 'latin'
-  style: ['normal', 'italic'], // Optionally include styles (e.g., italic)
-});
 
 import { Inter } from "next/font/google";
 const inter = Inter({
@@ -13,19 +7,7 @@ const inter = Inter({
   style: ['normal', 'italic'], // Optionally include styles (e.g., italic)
 });
 
-import { Rubik } from "next/font/google";
-const rubik = Rubik({
-  weight: ['400', '500', '600', '700'], // Specify the weights you need
-  subsets: ['latin'],     // Specify subsets like 'latin'
-  style: ['normal', 'italic'], // Optionally include styles (e.g., italic)
-});
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-import { ChevronRight } from "lucide-react";
-import AdminSidebar from "@/components/AdminSidebar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useEffect, useState } from "react";
 import axios from "axios";

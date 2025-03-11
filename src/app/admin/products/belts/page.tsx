@@ -1,14 +1,7 @@
 "use client"
-import { Newsreader } from "next/font/google";
+
 import { Inter } from "next/font/google";
 const inter = Inter({
-  weight: ['400', '500', '600', '700'], // Specify the weights you need
-  subsets: ['latin'],     // Specify subsets like 'latin'
-  style: ['normal', 'italic'], // Optionally include styles (e.g., italic)
-});
-
-import { Rubik } from "next/font/google";
-const rubik = Rubik({
   weight: ['400', '500', '600', '700'], // Specify the weights you need
   subsets: ['latin'],     // Specify subsets like 'latin'
   style: ['normal', 'italic'], // Optionally include styles (e.g., italic)

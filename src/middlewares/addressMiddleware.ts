@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { NextURL } from "next/dist/server/web/next-url";
-import { auth } from "@/auth";
 import { Session } from "next-auth";
 
 export async function addressMiddleware(request: NextRequest, session: Session) {

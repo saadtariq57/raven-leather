@@ -1,4 +1,5 @@
 "use client"
+
 import { Inter } from "next/font/google";
 const inter = Inter({
     weight: ['400', '500', '600', '700'],
@@ -6,24 +7,29 @@ const inter = Inter({
     style: ['normal', 'italic'],
 });
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowRight } from "lucide-react";
 import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function PaymentSelection() {
     const router = useRouter();
-    const totalAmount = Number(localStorage.getItem("totalAmount"));
+    
+    const [totalAmount, setTotalAmount] = useState(0);
+    useEffect(() => {
+        const amount = Number(localStorage.getItem("totalAmount"));
+        setTotalAmount(amount);
+    }, []);
 
     const [selectedOption, setSelectedOption] = useState<"card" | "cod">("cod");
 
     const handleOptionChange = (option: "card" | "cod") => {
-        ~
             setSelectedOption(option);
     };
 
@@ -70,7 +76,7 @@ export default function PaymentSelection() {
 
             }
 
-        } catch (error: AxiosError | any) {
+        } catch (error: any) {
             setIsSubmitting(false);
             console.log("Error while submitting order:", error.message);
         }
@@ -104,8 +110,8 @@ export default function PaymentSelection() {
                             <Label className="text-sm">Credit/Debit Card</Label>
                         </div>
                         <div className="flex items-center space-x-2">
-                            <img src="/images/visa.png" alt="Visa" className="w-6" />
-                            <img src="/images/mastercard.png" alt="MasterCard" className="w-6" />
+                            <Image src="/images/visa.png" alt="Visa" width={50} height={50} className="w-6" />
+                            <Image src="/images/mastercard.png" alt="MasterCard" width={50} height={50} className="w-6" />
                         </div>
                     </div>
 
@@ -144,7 +150,7 @@ export default function PaymentSelection() {
                             />
                             <Label className="text-sm">Cash on Delivery</Label>
                         </div>
-                        <img src="/images/cod.png" alt="Cash" className="relative w-6" />
+                        <Image src="/images/cod.png" alt="Cash" width={50} height={50} className="relative w-6" />
                     </div>
                 </CardContent>
 

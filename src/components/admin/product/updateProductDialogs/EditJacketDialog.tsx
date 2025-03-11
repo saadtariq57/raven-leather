@@ -34,7 +34,7 @@ import {
 import { ImageUploader } from "@/components/ImageUpload";
 import { useEffect, useState } from "react";
 import { UploadFile } from "antd";
-import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
+import { SelectGroup } from "@radix-ui/react-select";
 import axios from "axios";
 import { ProductWithImagesAndSizes } from "@/types/client/product.types";
 import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner";
@@ -215,7 +215,7 @@ export default function EditJacketDialog({ productId }: { productId: number }) {
       { size: "XL", quantity: data.xlQuantity },
     ];
     formData.append("sizes", JSON.stringify(sizesArray));
-+
+
     // Print all form data
     console.log("FormData images:", formData.getAll("images"));
 
@@ -392,7 +392,7 @@ export default function EditJacketDialog({ productId }: { productId: number }) {
                   <FormField
                     control={form.control}
                     name="images"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <FormLabel>Product Images</FormLabel>
                         <FormControl>

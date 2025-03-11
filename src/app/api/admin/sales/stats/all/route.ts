@@ -1,7 +1,7 @@
 import { getAllSalesRecords, getAllTimeStats, getCurrentMonthStats, getCurrentYearStats, getTodayStats } from "@/controllers/salesController";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
     try {
         const { todayRevenue, todaySales } = await getTodayStats();
         const { monthRevenue, monthSales } = await getCurrentMonthStats();

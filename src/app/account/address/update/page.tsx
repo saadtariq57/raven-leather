@@ -12,7 +12,6 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner";
 import { Address } from "@prisma/client";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import UpdateAddressPageSkeleton from "./loading";
 
 const addressSchema = z.object({

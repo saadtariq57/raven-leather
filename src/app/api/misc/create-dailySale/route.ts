@@ -1,8 +1,7 @@
-
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "../../../../../DB/db.config";
 
-export async function POST( request: NextRequest ) {
+export async function POST() {
     try {
         const today = new Date();
         const onlyDate = new Date(today.setHours(0, 0, 0, 0));

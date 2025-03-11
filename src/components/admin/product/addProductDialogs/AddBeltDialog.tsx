@@ -34,7 +34,7 @@ import {
 import { ImageUploader } from "@/components/ImageUpload";
 import { useState } from "react";
 import { UploadFile } from "antd";
-import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
+import { SelectGroup } from "@radix-ui/react-select";
 import axios from "axios";
 import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner";
 
@@ -213,7 +213,7 @@ export default function AddBeltDialog() {
                 <FormField
                   control={form.control}
                   name="images"
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem>
                       <FormLabel>Product Images</FormLabel>
                       <FormControl>

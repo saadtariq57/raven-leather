@@ -6,13 +6,6 @@ const inter = Inter({
   style: ['normal', 'italic'], // Optionally include styles (e.g., italic)
 });
 
-import { Rubik } from "next/font/google";
-const rubik = Rubik({
-  weight: ['400', '500', '600', '700'], // Specify the weights you need
-  subsets: ['latin'],     // Specify subsets like 'latin'
-  style: ['normal', 'italic'], // Optionally include styles (e.g., italic)
-});
-
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
@@ -24,8 +17,6 @@ import axios from "axios";
 import { ProductWithImagesAndSizes } from "@/types/client/product.types";
 import DeleteProductDialog from "@/components/admin/product/DeleteProductDialog";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import EditBeltDialog from "@/components/admin/product/updateProductDialogs/EditBeltDialog";
-import AddBeltDialog from "@/components/admin/product/addProductDialogs/AddBeltDialog";
 import AddWalletDialog from "@/components/admin/product/addProductDialogs/AddWalletDialog";
 import EditWalletDialog from "@/components/admin/product/updateProductDialogs/EditWalletDialog";
 

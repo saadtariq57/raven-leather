@@ -1,4 +1,5 @@
 "use client";
+
 import { Newsreader } from "next/font/google";
 const newsreader = Newsreader({
   weight: ['400', '500', '600', '700'], // Specify the weights you need
@@ -15,11 +16,11 @@ const inter = Inter({
 
 import { useEffect, useState } from "react";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { Button } from "./ui/button";
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
 import AdminProfileButton from "./AdminProfileButton";
+import Image from "next/image";
 
 export default function AdminSidebar() {
   const [pendingOrderCount, setPendingOrderCount] = useState(0);
@@ -58,7 +59,7 @@ export default function AdminSidebar() {
         {/* Dashboard */}
         <Link href="/admin/dashboard">
         <div className="pl-4 flex items-center gap-3 cursor-pointer hover:bg-[#292828] py-2 transition duration-100">
-          <img src="/assets/dashboard.png" className="w-5 h-5" alt="Dashboard" />
+          <Image src="/assets/dashboard.png" width={50} height={50} className="w-5 h-5" alt="Dashboard" />
           <span>Dashboard</span>
         </div>
         </Link>
@@ -68,7 +69,7 @@ export default function AdminSidebar() {
           <CollapsibleTrigger asChild>
             <div className="pl-4 flex items-center justify-between cursor-pointer hover:bg-[#292828] py-2 transition duration-100">
               <div className="flex items-center gap-3">
-                <img src="/assets/product.png" className="w-5 h-5" alt="Products" />
+                <Image src="/assets/product.png" width={50} height={50} className="w-5 h-5" alt="Products" />
                 <span>Products</span>
               </div>
               <ChevronDown className="h-4 w-4 mr-4" />
@@ -87,7 +88,7 @@ export default function AdminSidebar() {
           <CollapsibleTrigger asChild>
             <div className="pl-4 flex items-center justify-between cursor-pointer hover:bg-[#292828] py-2 transition duration-100">
               <div className="flex items-center gap-3">
-                <img src="/assets/orders.png" className="w-5 h-5" alt="Orders" />
+                <Image src="/assets/orders.png" width={50} height={50} className="w-5 h-5" alt="Orders" />
                 <span>Orders</span>
               </div>
               <ChevronDown className="h-4 w-4 mr-4" />
@@ -103,7 +104,7 @@ export default function AdminSidebar() {
         {/* Customers */}
         <Link href="/admin/customers">
           <div className="pl-4 flex items-center gap-3 cursor-pointer hover:bg-[#292828] py-2 transition duration-100">
-            <img src="/assets/customers.png" className="w-5 h-5" alt="Customers" />
+            <Image src="/assets/customers.png" width={50} height={50} className="w-5 h-5" alt="Customers" />
             <span>Customers</span>
           </div>
         </Link>
@@ -111,7 +112,7 @@ export default function AdminSidebar() {
         {/* Sales */}
         <Link href="/admin/sales">
         <div className="pl-4 flex items-center gap-3 cursor-pointer hover:bg-[#292828] py-2 transition duration-100">
-          <img src="/assets/sales.png" className="w-5 h-5" alt="Sales" />
+          <Image src="/assets/sales.png" width={50} height={50} className="w-5 h-5" alt="Sales" />
           <span>Sales</span>
         </div>
         </Link>

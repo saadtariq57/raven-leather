@@ -10,14 +10,22 @@ export default async function resetPasswordHandler(email: string, otp: string, p
         where: { email }
     });
 
-    if(user?.verifyCode !== otp || user?.verifyCodeExpiry! < new Date()) {
+    if (!user?.verifyCodeExpiry) {
+        throw new Error("OTP expired");
+    }
+
+    if(user?.verifyCode !== otp || user?.verifyCodeExpiry < new Date()) {
         throw new Error("Invalid OTP");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    if(!user.verifyCodeExpiry){
+        throw new Error("OTP expired");
+    }
+
     // Updating the password if the otp is valid and not expired
-    if(user.verifyCode === otp && user.verifyCodeExpiry! > new Date()) {
+    if(user.verifyCode === otp && user.verifyCodeExpiry > new Date()) {
         const updatedPassword = await prisma.user.update({
             where: { email },
             data: {

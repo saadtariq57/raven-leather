@@ -1,5 +1,3 @@
-// /pages/category/jackets/[productSlug].tsx
-
 import ViewProduct from "@/components/product/ViewProduct";
 
 export default async function ProductPage({ params }: { params: { productSlug: string } }) {

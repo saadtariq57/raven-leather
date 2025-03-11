@@ -6,7 +6,16 @@ import { getProductDirect } from "@/controllers/productController";
 import { getUserAddress } from "@/lib/address";
 import { ProductWithImagesAndSizes } from "@/types/client/product.types";
 
-export default async function CheckoutPage({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+
+interface SearchParams {
+    [key: string]: string | string[] | undefined;
+  }
+  
+  interface PageProps {
+    searchParams: SearchParams;
+  }
+
+export default async function CheckoutPage({ searchParams }: PageProps) {
     const data = await auth();
     
     const address = await getUserAddress(Number(data?.user.id));

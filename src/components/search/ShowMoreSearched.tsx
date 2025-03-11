@@ -33,7 +33,7 @@ export default function ShowMoreSearched({ products, query }: ProductsClientProp
       {/* Header Section */}
       <div className="flex items-center justify-between mb-2">
         <h1 className={`text-3xl sm:text-4xl mt-5 ${newsreader.className}`}>
-          Searched results for "{query}"
+          Searched results for &quot;{query}&quot;
         </h1>
 
       </div>

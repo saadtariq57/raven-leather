@@ -1,11 +1,11 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import OrderConfirmed from "@/components/order/OrderConfirmed";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { OrderWithOrderItemsAndProduct } from "@/types/client/order.types";
 import OrderByIdSkeleton from "./loading";
-
 
 export default function OrderConfirmationCard() {
     const searchParams = useSearchParams();

@@ -5,7 +5,6 @@ export default async function SendVerificationEmail(email: string, verifyCode: s
         const response = await sendEmail({
             to: email,
             subject: "Raven Verification Code",
-            // htmlContent: VerificationEmailTemplate( { otp: verifyCode} )
             htmlContent: `
                     <div>
                     <h1>Verification Code for Raven account</h1>

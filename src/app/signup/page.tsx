@@ -1,4 +1,5 @@
 "use client"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -6,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -21,7 +21,6 @@ import Link from "next/link"
 import signupHandler from "./signupHandler"
 import { useRouter } from "next/navigation"
 import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner"
-import { redirect } from "next/dist/server/api-utils"
 
 export const formSchema = z.object({
     fullName: z.string().min(2, {

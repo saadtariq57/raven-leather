@@ -1,17 +1,14 @@
 "use client";
-import { useSession, signOut, getSession } from "next-auth/react";
+
+import { useSession, signOut,  } from "next-auth/react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { LogOut, LogIn } from 'lucide-react';
 
 
 export default function AccountMenu() {
-    const router = useRouter();
     const { data: session } = useSession(); // Use status to track loading state
-
 
     return (
         <DropdownMenu>

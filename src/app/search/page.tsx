@@ -1,6 +1,6 @@
 import ShowMoreSearched from '@/components/search/ShowMoreSearched';
 
-export default async function JacketsPage({ searchParams }: { searchParams: { query: string} }) {
+export default async function Search({ searchParams }: { searchParams: { query: string} }) {
     const query = searchParams.query;
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/search?query=${query}`);

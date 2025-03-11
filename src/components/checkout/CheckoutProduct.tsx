@@ -140,7 +140,6 @@ export default function CheckoutProduct({ product, productQuantity, productSize,
             }
 
             router.push(`/cart/checkout/payment`);
-            // setTimeout(() => setIsSubmitting(false), 500);
         } catch (error) {
             setIsSubmitting(false);
             console.log("Error in handleContinueToPayment. ", error);
@@ -167,8 +166,11 @@ export default function CheckoutProduct({ product, productQuantity, productSize,
                                     <div className="flex justify-between items-center px-4 py-2 bg-gray-200 ">
                                         <span>Shipping</span>
                                         <span>
-                                            <img
+                                            <Image
                                                 src="/assets/pencil.svg"
+                                                alt="Edit Address"
+                                                width={20}
+                                                height={20}
                                                 className="size-5 cursor-pointer"
                                                 onClick={() => router.push(`/account/address/update?redirect=${encodeURIComponent(`/cart/checkout?${productPath}`)}`)} />
                                         </span>

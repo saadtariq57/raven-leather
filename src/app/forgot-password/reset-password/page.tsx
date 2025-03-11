@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import ButtonLoadingSpinner from "@/components/ButtonLoadingSpinner";
 import resetPasswordHandler from "./resetPasswordHandler";
 import signinOTP from "@/app/verify-email/signinOTP";

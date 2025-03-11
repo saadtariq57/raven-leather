@@ -1,26 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "../../DB/db.config"
 
-// export const createUser = async (request: NextRequest) => {
-//     const { fullName, email, password } = await request.json();
-
-//     //If user does not exists, create new user
-//     const newUser = await prisma.user.create({
-//         data: {
-//             fullName,
-//             email: email,
-//             password: password
-//         }
-//     });
-
-//     if(newUser){
-//         return NextResponse.json({
-//             success: true,
-//             message: "New user created."
-//         }, { status: 200 })
-//     }
-// }
-
 export const getUser = async (id: number) => {
     const user = await prisma.user.findFirst({ 
         where: {
@@ -74,5 +54,5 @@ export const deleteUser = async (id: number) => {
         }
     })
 
-    return deleteUser
+    return deletedUser
 }

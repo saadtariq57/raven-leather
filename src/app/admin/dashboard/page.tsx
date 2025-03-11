@@ -1,10 +1,4 @@
 "use client"
-import { Newsreader } from "next/font/google";
-const newsreader = Newsreader({
-  weight: ['400', '500', '600', '700'], // Specify the weights you need
-  subsets: ['latin'],     // Specify subsets like 'latin'
-  style: ['normal', 'italic'], // Optionally include styles (e.g., italic)
-});
 
 import { Inter } from "next/font/google";
 const inter = Inter({
@@ -30,7 +24,6 @@ import { useEffect, useState } from "react";
 import { MonthSales, TodaySales } from "@/types/client/sales.types";
 import { MonthOrders, TodayOrders } from "@/types/client/order.types";
 import { BestSellingProducts } from "@/types/client/product.types";
-import { Product } from "@prisma/client";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function Dashboard() {
