@@ -35,27 +35,6 @@ export async function createOrder(request: NextRequest) {
   );
   console.log("Total Quantity: " + totalQuantity);
 
-  // //* Calculating total amount
-  // // Fetch product prices from DB
-  // const productIds = orderItems.map(
-  //   (item: { productId: number }) => item.productId
-  // );
-  // const products = await prisma.product.findMany({
-  //   where: { id: { in: productIds } },
-  //   select: { id: true, price: true },
-  // });
-
-  // // Create a map of productId -> price
-  // const productPriceMap = new Map(
-  //   products.map((product) => [product.id, product.price])
-  // );
-
-  // // Calculate total amount using fetched prices
-  // const totalAmount = orderItems.reduce((acc, item) => {
-  //   const price = Number(productPriceMap.get(item.productId));
-  //   return acc + price * item.quantity;
-  // }, 0);
-
   //* Creating new order
   const newOrder = await prisma.order.create({
     data: {

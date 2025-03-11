@@ -1,27 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/auth";
 import { prisma } from "../../../../../../DB/db.config";
 
 export async function GET(request: NextRequest) {
     try {
         const orderId = Number(request.nextUrl.searchParams.get("orderId"));
 
-        const session = await auth();
-        const userIdFromSession = Number(session?.user?.id);
-        console.log("userIdFromSession: ", userIdFromSession);
+        //! For the time being, we are not authenticating the user.
+        // const session = await auth();
+        // const userIdFromSession = Number(session?.user?.id);
+        // console.log("userIdFromSession: ", userIdFromSession);
 
-        if (!userIdFromSession) {
-            console.error("Unauthorized access to orderById API");
-            return NextResponse.json({
-                success: false,
-                message: "Unauthorized access to orderById API",
-            }, { status: 403 });  // Forbidden
-        }
+        // if (!userIdFromSession) {
+        //     console.error("Unauthorized access to orderById API");
+        //     return NextResponse.json({
+        //         success: false,
+        //         message: "Unauthorized access to orderById API",
+        //     }, { status: 403 });  // Forbidden
+        // }
 
         const order = await prisma.order.findUnique({
             where: {
                 id: orderId,
-                user_id: userIdFromSession,
             },
             include: {
                 orderItems: {
