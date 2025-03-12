@@ -1,15 +1,17 @@
 import { auth } from "@/auth";
 import { getGuestCartItemsCount, getUserCartItemsCount } from "@/controllers/cartController";
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 export async function GET(request: NextRequest) {
     try {
-        const authjs_session = request.cookies.get("authjs.session-token")?.value;
+        const token = await getToken({ req: request, secret: process.env.AUTH_SECRET });
+        // const authjs_session = request.cookies.get("authjs.session-token")?.value;
         const session_id = request.cookies.get("session_id")?.value;
 
-        if (authjs_session) {
+        if (token) {
             // Handle authenticated user
-            console.log("authjs_session: ", authjs_session);
+            console.log("Token: ", token);
             const data = await auth();
             if (data?.user) {
                 const cartItemsCount = await getUserCartItemsCount(Number(data.user.id));
@@ -23,7 +25,7 @@ export async function GET(request: NextRequest) {
             }
         }
 
-        if (session_id && !authjs_session) {
+        if (session_id && !token) {
             // Handle guest user
             console.log("session_id: ", session_id);
             

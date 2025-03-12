@@ -4,10 +4,12 @@ import { cookies } from "next/headers";
 export async function getCartItems() {
     try {
         const cookieStore = cookies();
-        const userSession = (await cookieStore).get("authjs.session-token");
+        const userSession =
+            (await cookieStore).get("__Secure-authjs.session-token") ||
+            (await cookieStore).get("authjs.session-token");
         const guestSession = (await cookieStore).get("session_id");
 
-        if(userSession){            
+        if (userSession) {
             const cookieHeader = `authjs.session-token=${userSession.value}`; // Format the cookie header. If you have multiple cookies, you can concatenate them.
             const response = await axios.get(
                 `${process.env.NEXT_PUBLIC_API_URL}/api/cart/get-items`,
@@ -16,10 +18,10 @@ export async function getCartItems() {
                         Cookie: cookieHeader,
                     },
                 }
-            ); 
-    
+            );
+
             // console.log("response: ", response);
-    
+
             const data = await response.data;
             return data.cartItems;
         }
@@ -34,10 +36,10 @@ export async function getCartItems() {
                         Cookie: cookieHeader,
                     },
                 }
-            ); 
-    
+            );
+
             // console.log("response: ", response);
-    
+
             const data = await response.data;
             return data.cartItems;
         }

@@ -4,11 +4,17 @@ import admin_middleware from "./middlewares/adminRequestAuth";
 import { userMiddleware } from "./middlewares/userMiddleware";
 import { addressMiddleware } from "./middlewares/addressMiddleware";
 import { auth } from "@/auth";
+import { getToken } from "next-auth/jwt";
 
 export default async function middleware(req: NextRequest) {
     const session = await auth();
 
-    const authjs_session = req.cookies.get("authjs.session-token")?.value;
+    const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+    // console.log("Token in middleware: ", token);
+
+    // const authjs_token = req.cookies.get("authjs.session-token")?.value;
+    // console.log("authjs_session in middleware: ", token);
+
     const session_id = req.cookies.get("session_id")?.value;
 
     // console.log("Authjs session in middleware: ", authjs_session);
@@ -21,8 +27,8 @@ export default async function middleware(req: NextRequest) {
     }
 
 
-    if (!session_id && !authjs_session) {
-        console.log("### No session_id and No authjs_session");
+    if (!session_id && !token) {
+        console.log("### Not Guest not Auth User");
         // If it's an API or admin route and the user is not logged in, redirect to admin signin
         if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin')) {
             url.pathname = '/admin/signin';
@@ -42,8 +48,8 @@ export default async function middleware(req: NextRequest) {
     }
 
     // If the user is not signed in, handle the guest session middleware
-    if (session_id && !authjs_session) {
-        console.log("### In session");
+    if (session_id && !token) {
+        console.log("### Guest User");
 
         // If it's a cart API route, apply guestMiddleware
         if (url.pathname.startsWith('/cart') || url.pathname.startsWith('/api/cart')) {
@@ -69,10 +75,9 @@ export default async function middleware(req: NextRequest) {
 
     }
 
-    if (authjs_session) {
-        console.log("### In authjs_session");
+    if (token) {
+        console.log("### Auth User");
         
-
         // If the user is authenticated and trying to access an admin route, proceed with admin middleware
         if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin')) {
             return admin_middleware(url);
@@ -94,6 +99,5 @@ export default async function middleware(req: NextRequest) {
     // Continue with the request if no conditions are met
     return NextResponse.next();
 }
-// })
 
 
