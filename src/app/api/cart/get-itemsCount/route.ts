@@ -1,12 +1,10 @@
 import { auth } from "@/auth";
 import { getGuestCartItemsCount, getUserCartItemsCount } from "@/controllers/cartController";
 import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
 
 export async function GET(request: NextRequest) {
     try {
-        const token = await getToken({ req: request, secret: process.env.AUTH_SECRET });
-        // const authjs_session = request.cookies.get("authjs.session-token")?.value;
+        const token = request.cookies.get("__Secure-authjs.session-token" )?.value || request.cookies.get("authjs.session-token")?.value;
         const session_id = request.cookies.get("session_id")?.value;
 
         if (token) {

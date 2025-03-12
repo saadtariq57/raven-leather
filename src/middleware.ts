@@ -4,18 +4,14 @@ import admin_middleware from "./middlewares/adminRequestAuth";
 import { userMiddleware } from "./middlewares/userMiddleware";
 import { addressMiddleware } from "./middlewares/addressMiddleware";
 import { auth } from "@/auth";
-import { getToken } from "next-auth/jwt";
 import { cookies } from "next/headers";
 
 export default async function middleware(req: NextRequest) {
     const cookieStore = cookies();
     const session = await auth();
 
-    const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+    const token = req.cookies.get("__Secure-authjs.session-token" )?.value || req.cookies.get("authjs.session-token")?.value;
     console.log("Token in middleware: ", token);
-
-    // const authjs_token = req.cookies.get("authjs.session-token")?.value;
-    // console.log("authjs_session in middleware: ", token);
 
     const session_id = req.cookies.get("session_id")?.value;
 
@@ -78,7 +74,9 @@ export default async function middleware(req: NextRequest) {
     }
 
     if (token) {
-        (await cookieStore).delete("session_id");
+        const sessionIdDeleted = (await cookieStore).delete("session_id");
+        console.log("session_id deleted: ", sessionIdDeleted);
+
         console.log("### Auth User");
         
         // If the user is authenticated and trying to access an admin route, proceed with admin middleware
