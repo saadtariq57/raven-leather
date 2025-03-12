@@ -11,9 +11,12 @@ export async function GET(request: NextRequest) {
         const session_id = request.cookies.get("session_id")?.value;
 
 
+        const cookies = request.cookies.getAll();
+        console.log("Cookies in cart item route: ", cookies);
+        console.log("Token in cart item route: ", token);
+
         if (token) {
             // Handle authenticated user
-            console.log("Token: ", token);
             const data = await auth();
             if (data?.user) {
                 const cartItems = await getUserCartItems(Number(data.user.id));
