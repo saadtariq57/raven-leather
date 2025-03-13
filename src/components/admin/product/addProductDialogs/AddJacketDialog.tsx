@@ -310,6 +310,7 @@ export default function AddJacketDialog() {
                       <FormLabel>Product Images</FormLabel>
                       <FormControl>
                         <ImageUploader
+                        
                           value={fileList}
                           onChange={(files) => {
                             setFileList(files);

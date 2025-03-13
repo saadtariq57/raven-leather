@@ -13,6 +13,11 @@ interface ImageUploaderProps {
 export const ImageUploader: React.FC<ImageUploaderProps> = ({ onChange, value }) => {
   const [fileList, setFileList] = useState<UploadFile[]>(value);
 
+  // This prevents automatic upload to any external endpoint
+  const beforeUpload = () => {
+    return false; // Returning false prevents the upload
+  };
+
   const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
     setFileList(newFileList);
     onChange(newFileList); // Pass the file list to the parent form
@@ -36,7 +41,8 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onChange, value })
   return (
     <ImgCrop rotationSlider>
       <Upload
-        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+        // action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+        beforeUpload={beforeUpload}
         listType="picture-card"
         fileList={fileList}
         onChange={handleChange}
