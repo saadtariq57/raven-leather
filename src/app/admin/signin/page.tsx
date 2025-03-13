@@ -25,6 +25,7 @@ import { formSchema } from "./adminFormSchema"
 export default function AdminSignin() {
     const [showPassword, setShowPassword] = useState(false);
     const [isSigningIn, setIsSigningIn] = useState(false);
+    const [error, setError] = useState(false);
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -42,6 +43,9 @@ export default function AdminSignin() {
         const response = await adminSigninHandler(values);
         if(response){
             redirect("/admin/dashboard");
+        } else {
+            setError(true);
+            setIsSigningIn(false);
         }
     }
 
@@ -104,6 +108,12 @@ export default function AdminSignin() {
                                 </FormItem>
                             )}
                         />
+                        {/* Error Message */}
+                        {error && (
+                            <div className="text-red-500 text-sm">
+                                Invalid username or password
+                            </div>
+                        )}
 
                         {/* Sign In Button */}
                         <Button type="submit" className="w-full" disabled={isSigningIn}>

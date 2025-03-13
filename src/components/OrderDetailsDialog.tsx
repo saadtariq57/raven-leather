@@ -31,7 +31,7 @@ export default function OrderDetailsDialog({ order, trigger }: OrderDetailsDialo
                 orderId,
                 orderStatus: "completed",
             };
-            const response = await axios.post('/api/admin/order/change-orderStatus', data)
+            const response = await axios.post('/api/admin/orders/change-orderStatus', data)
             console.log("response: ", response.data);
             if (response.data.success) {
                 setIsCompleting(false);

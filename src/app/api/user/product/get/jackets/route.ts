@@ -1,3 +1,4 @@
+
 // /app/api/user/product/get/jackets/route.ts
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../../../../DB/db.config";

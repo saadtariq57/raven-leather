@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../DB/db.config";
 import { uploadFile } from "@/utils/file-upload/uploadFile";
-import { deleteFile_from_Cloudinary, uploadFile_to_Cloudinary } from "@/utils/file-upload/cloudinary";
+import { deleteFile_from_Cloudinary, uploadFile_to_Cloudinary, uploadStream_to_Cloudinary } from "@/utils/file-upload/cloudinary";
 import { generateSlug } from "@/lib/generateSlug";
 
 export const createProduct = async (request: NextRequest) => {
@@ -19,13 +19,18 @@ export const createProduct = async (request: NextRequest) => {
     const imageFiles = formData.getAll("images") as File[];
 
     if (imageFiles && imageFiles.length > 0) {
-        const localUploads = await Promise.all(
-            imageFiles.map(async (imageFile) => await uploadFile(imageFile))
-        );
-
         const cloudinaryUploads = await Promise.all(
-            localUploads.map(async (localUpload) => await uploadFile_to_Cloudinary(localUpload.filePath))
-        );
+            imageFiles.map(async (imageFile) => {
+                // Convert file to buffer
+                const fileBuffer = await imageFile.arrayBuffer();
+                const buffer = Buffer.from(fileBuffer);
+
+                // Upload to Cloudinary
+                console.log(`Uploading image: ${imageFile.name}`);
+                const imageUploaded = await uploadStream_to_Cloudinary(buffer)
+                return imageUploaded;
+            })
+        )
 
         // Create product WITHOUT slug first, so we get the generated ID
         const newProduct = await prisma.product.create({
@@ -148,10 +153,18 @@ export const updateProduct = async (id: number, request: NextRequest) => {
     // Handle Image Updates
     if (imageFiles && imageFiles.length > 0) {
         // Upload new images
-        const localUploads = await Promise.all(imageFiles.map(uploadFile));
         const cloudinaryUploads = await Promise.all(
-            localUploads.map(async (localUpload) => await uploadFile_to_Cloudinary(localUpload.filePath))
-        );
+            imageFiles.map(async (imageFile) => {
+                // Convert file to buffer
+                const fileBuffer = await imageFile.arrayBuffer();
+                const buffer = Buffer.from(fileBuffer);
+
+                // Upload to Cloudinary
+                console.log(`Uploading image: ${imageFile.name}`);
+                const imageUploaded = await uploadStream_to_Cloudinary(buffer)
+                return imageUploaded;
+            })
+        )
 
         // Delete old images from Cloudinary
         await Promise.all(
@@ -248,14 +261,14 @@ export const deleteProduct = async (id: number) => {
                 return await deleteFile_from_Cloudinary(image.public_id);
             })
         )
-        
-        if(cloudinaryDeleted){
+
+        if (cloudinaryDeleted) {
             return NextResponse.json({
                 success: true,
                 message: "Product deleted successfully.",
             }, { status: 200 })
         }
-        
+
     }
 }
 

@@ -10,6 +10,9 @@ export async function GET() {
             include: {
                 images: true,
                 sizes: true,
+            },
+            orderBy: {
+                id: "desc"
             }
         })
 

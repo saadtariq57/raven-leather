@@ -282,6 +282,9 @@ export async function getPendingOrders() {
         },
       },
     },
+    orderBy: {
+      id: "desc",
+    }
   });
 
   return orders;
@@ -301,6 +304,9 @@ export async function getCompletedOrders() {
         },
       },
     },
+    orderBy: {
+      id: "desc",
+    }
   });
 
   return orders;
@@ -320,6 +326,9 @@ export async function getCancelledOrders() {
         },
       },
     },
+    orderBy: {
+      id: "desc",
+    }
   });
 
   return orders;

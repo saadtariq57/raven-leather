@@ -117,7 +117,7 @@ export default function Belts() {
 
                 {/* Table Body */}
                 <TableBody>
-                  {belts.map((bag, index) => (
+                  {belts.map((belt, index) => (
                     <TableRow key={index} className="hover:bg-gray-100">
                       {/* Checkbox */}
                       <TableCell className="text-center">
@@ -131,20 +131,20 @@ export default function Belts() {
                       {/* Product Information */}
                       <TableCell className="flex items-center gap-3">
                         <Image
-                          src={bag.images[0].url}
-                          alt={bag.name}
+                          src={belt.images[0].url}
+                          alt={belt.name}
                           width={30}
                           height={30}
                           className="rounded-md"
                         />
                         <div>
-                          <div className="font-medium">{bag.name}</div>
-                          <div className="text-gray-500 text-sm">{bag.color}</div>
+                          <div className="font-medium">{belt.name}</div>
+                          <div className="text-gray-500 text-sm">{belt.color}</div>
                         </div>
                       </TableCell>
-                      <TableCell>{bag.price}</TableCell>
-                      <TableCell>{bag.quantity}</TableCell>
-                      <TableCell className="text-gray-500">{bag.status ? "Active" : "Inactive"}</TableCell>
+                      <TableCell>{belt.price}</TableCell>
+                      <TableCell>{belt.quantity}</TableCell>
+                      <TableCell className="text-gray-500">{belt.status ? "Active" : "Inactive"}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

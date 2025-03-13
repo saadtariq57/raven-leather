@@ -32,6 +32,7 @@ export default function Jackets() {
       try {
         const response = await axios.get<{ products: ProductWithImagesAndSizes[] }>("/api/admin/product/get/jackets");
         console.log("response: ", response.data);
+        
         setJackets(response.data.products);
       } catch (error) {
         console.error(error);
@@ -117,7 +118,10 @@ export default function Jackets() {
 
                 {/* Table Body */}
                 <TableBody>
-                  {jackets.map((bag, index) => (
+                  {jackets.map((jacket, index) => {
+                      const totalQuantity = jacket.sizes.reduce((sum, size) => sum + size.quantity, 0);
+
+                    return (
                     <TableRow key={index} className="hover:bg-gray-100">
                       {/* Checkbox */}
                       <TableCell className="text-center">
@@ -131,22 +135,23 @@ export default function Jackets() {
                       {/* Product Information */}
                       <TableCell className="flex items-center gap-3">
                         <Image
-                          src={bag.images[0].url}
-                          alt={bag.name}
+                          src={jacket.images[0].url}
+                          alt={jacket.name}
                           width={30}
                           height={30}
                           className="rounded-md"
                         />
                         <div>
-                          <div className="font-medium">{bag.name}</div>
-                          <div className="text-gray-500 text-sm">{bag.color}</div>
+                          <div className="font-medium">{jacket.name}</div>
+                          <div className="text-gray-500 text-sm">{jacket.color}</div>
                         </div>
                       </TableCell>
-                      <TableCell>{bag.price}</TableCell>
-                      <TableCell>{bag.quantity}</TableCell>
-                      <TableCell className="text-gray-500">{bag.status ? "Active" : "Inactive"}</TableCell>
+                      <TableCell>{jacket.price}</TableCell>
+                      <TableCell>{totalQuantity}</TableCell>
+                      <TableCell className="text-gray-500">{jacket.status ? "Active" : "Inactive"}</TableCell>
                     </TableRow>
-                  ))}
+                  )
+                  })}
                 </TableBody>
               </Table>
             </div>

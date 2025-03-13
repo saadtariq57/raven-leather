@@ -116,7 +116,7 @@ export default function Belts() {
 
                 {/* Table Body */}
                 <TableBody>
-                  {wallets.map((bag, index) => (
+                  {wallets.map((wallet, index) => (
                     <TableRow key={index} className="hover:bg-gray-100">
                       {/* Checkbox */}
                       <TableCell className="text-center">
@@ -130,20 +130,20 @@ export default function Belts() {
                       {/* Product Information */}
                       <TableCell className="flex items-center gap-3">
                         <Image
-                          src={bag.images[0].url}
-                          alt={bag.name}
+                          src={wallet.images[0].url}
+                          alt={wallet.name}
                           width={30}
                           height={30}
                           className="rounded-md"
                         />
                         <div>
-                          <div className="font-medium">{bag.name}</div>
-                          <div className="text-gray-500 text-sm">{bag.color}</div>
+                          <div className="font-medium">{wallet.name}</div>
+                          <div className="text-gray-500 text-sm">{wallet.color}</div>
                         </div>
                       </TableCell>
-                      <TableCell>{bag.price}</TableCell>
-                      <TableCell>{bag.quantity}</TableCell>
-                      <TableCell className="text-gray-500">{bag.status ? "Active" : "Inactive"}</TableCell>
+                      <TableCell>{wallet.price}</TableCell>
+                      <TableCell>{wallet.quantity}</TableCell>
+                      <TableCell className="text-gray-500">{wallet.status ? "Active" : "Inactive"}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

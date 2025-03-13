@@ -1,4 +1,4 @@
-import { v2 as cloudinary } from "cloudinary"
+import { v2 as cloudinary, UploadApiOptions } from "cloudinary"
 import fs from "fs"
 
 cloudinary.config({
@@ -8,10 +8,10 @@ cloudinary.config({
 })
 
 //* Uploading file to Cloudinary
-export const uploadFile_to_Cloudinary = async ( filePath: string ) => {
+export const uploadFile_to_Cloudinary = async (filePath: string) => {
     try {
         const fileUploaded = await cloudinary.uploader.upload(filePath, { resource_type: "auto" });
-        if(fileUploaded){
+        if (fileUploaded) {
             console.log("File uploaded on cloudinary.");
             fs.unlinkSync(filePath);
             return fileUploaded;
@@ -22,12 +22,29 @@ export const uploadFile_to_Cloudinary = async ( filePath: string ) => {
     }
 }
 
-cloudinary.uploader.upload_stream()
+//* Uploading stream to Cloudinary
+export async function uploadStream_to_Cloudinary(buffer: Buffer){
+        const uploadOptions: UploadApiOptions = {
+            folder: 'raven-leather/products',
+            resource_type: 'image',
+            public_id: `product_${Date.now()}`
+        };
+
+        // Convert buffer to base64 for upload
+        const base64String = `data:image/jpeg;base64,${buffer.toString('base64')}`;
+
+        const imageUploaded = await cloudinary.uploader.upload(base64String, uploadOptions)
+        return imageUploaded;
+
+}
+
+
+
 //* Deleting file from Cloudinary
-export async function deleteFile_from_Cloudinary(publicId: string){
+export async function deleteFile_from_Cloudinary(publicId: string) {
     try {
         const imageDeleted = await cloudinary.uploader.destroy(publicId)
-        if(imageDeleted){
+        if (imageDeleted) {
             console.log("File deleted from cloudinary.");
             return imageDeleted;
         }

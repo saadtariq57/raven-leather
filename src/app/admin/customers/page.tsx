@@ -65,7 +65,7 @@ export default function CompletedOrders() {
                                     <TableRow className="cursor-pointer hover:bg-gray-200" key={customer.email}>
                                         <TableCell className="font-semibold py-3">{customer.fullName}</TableCell>
                                         <TableCell className="font-semibold py-3">{customer.email}</TableCell>
-                                        <TableCell className="font-semibold py-3">{customer.address[0].phoneNo || "-"}</TableCell>
+                                        <TableCell className="font-semibold py-3">{customer.address[0]?.phoneNo || "-"}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

@@ -5,22 +5,27 @@ import { formSchema } from "./adminFormSchema";
 import { cookies } from "next/headers";
 
 export default async function adminSigninHandler(values: z.infer<typeof formSchema>) {
-    const username = values.username;
-    const password = values.password;
+    try {
+        const username = values.username;
+        const password = values.password;
 
-    if (!username || !password) {
-        throw new Error("Please provide all fields");
-    }
+        if (!username || !password) {
+            throw new Error("Please provide all fields");
+        }
 
-    const cookieStore = cookies();
+        const cookieStore = cookies();
 
-    const response = await signIn("credentials", { type: "admin" , username, password, redirect: false })
-    
-    if (response) {
-        (await cookieStore).delete("session_id");
-        return true
-    }
-    else {
+        const response = await signIn("credentials", { type: "admin", username, password, redirect: false })
+
+        if (response) {
+            (await cookieStore).delete("session_id");
+            return true
+        }
+        else {
+            return false;
+        }
+    } catch (error) {
+        console.error("Error in adminSigninHandler:", error);
         return false;
     }
 }
