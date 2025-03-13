@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../DB/db.config";
-import { uploadFile } from "@/utils/file-upload/uploadFile";
-import { deleteFile_from_Cloudinary, uploadFile_to_Cloudinary, uploadStream_to_Cloudinary } from "@/utils/file-upload/cloudinary";
+import { deleteFile_from_Cloudinary, uploadStream_to_Cloudinary } from "@/utils/file-upload/cloudinary";
 import { generateSlug } from "@/lib/generateSlug";
 
 export const createProduct = async (request: NextRequest) => {
