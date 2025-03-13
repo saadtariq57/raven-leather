@@ -149,7 +149,7 @@ export async function deleteCartItem(id: number) {
         return true;
     }
 }
-export async function deletManyCartItems(ids: number[]) {
+export async function deleteManyCartItems(ids: number[]) {    
     const cartItemDeleted = await prisma.cartItem.deleteMany({
         where: {
             id: {
@@ -157,10 +157,8 @@ export async function deletManyCartItems(ids: number[]) {
             },
         },
     });
-
-    if (cartItemDeleted) {
-        return true;
-    }
+    
+    return cartItemDeleted;
 }
 
 // Fetching cart items with Ids

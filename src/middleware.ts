@@ -11,7 +11,7 @@ export default async function middleware(req: NextRequest) {
     const session = await auth();
 
     const token = req.cookies.get("__Secure-authjs.session-token" )?.value || req.cookies.get("authjs.session-token")?.value;
-    console.log("Token in middleware: ", token);
+    // console.log("Token in middleware: ", token);
 
     const session_id = req.cookies.get("session_id")?.value;
 

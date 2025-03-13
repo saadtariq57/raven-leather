@@ -65,9 +65,11 @@ export default function PaymentSelection() {
             if (response.data.success) {
                 //Deleting cart items
                 const cartItemsIds = JSON.parse(localStorage.getItem("cartItemsIds") || "[]");
-                console.log("cartItemsIds", cartItemsIds);
+                console.log("cartItemsIds from localStorage", cartItemsIds);
+
                 if (cartItemsIds.length > 0) {
-                    await axios.post('/api/cart/deleteMany', cartItemsIds);
+                    const cartItemsDeleted = await axios.post('/api/cart/deleteMany', { cartItemsIds });
+                    console.log("cartItemsDeleted", cartItemsDeleted.data);
                 }
                 localStorage.clear();
                 router.replace(`/order-confirmed?orderId=${response.data.newOrder.id}`)

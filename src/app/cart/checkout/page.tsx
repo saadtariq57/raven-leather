@@ -22,6 +22,7 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
     console.log("address: ", address);
     
     const items = searchParams.items?.toString();
+    console.log("items: ", items);
     const productId = Number(searchParams.productId);
     const productQuantity = Number(searchParams.productQuantity);
     const productSize = searchParams.productSize ? String(searchParams.productSize) : "";

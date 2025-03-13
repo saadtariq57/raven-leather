@@ -1,15 +1,16 @@
-import { deletManyCartItems } from "@/controllers/cartController";
+import { deleteManyCartItems } from "@/controllers/cartController";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     try {
         const { cartItemsIds } = await request.json();
 
-        await deletManyCartItems(cartItemsIds);
+        const cartItemsDeleted = await deleteManyCartItems(cartItemsIds);
 
         return NextResponse.json({
             success: true,
             message: "Cart Items deleted.",
+            cartItemsDeleted
         }, { status: 200 })
 
     } catch (error: any) {
