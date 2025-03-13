@@ -144,10 +144,10 @@ export const updateProduct = async (id: number, request: NextRequest) => {
         return NextResponse.json({ success: false, message: "Product not found." }, { status: 404 });
     }
 
-    let slug = existingProduct.slug;
-    if (name !== existingProduct.name) {
-        slug = generateSlug(name, id); // Update slug if name changes
-    }
+    // let slug = existingProduct.slug;
+    // if (name !== existingProduct.name) {
+    //     slug = generateSlug(name, id); // Update slug if name changes
+    // }
 
     // Handle Image Updates
     if (imageFiles && imageFiles.length > 0) {
@@ -178,7 +178,6 @@ export const updateProduct = async (id: number, request: NextRequest) => {
             where: { id },
             data: {
                 name,
-                slug,
                 color,
                 price,
                 quantity: quantity || null,
@@ -216,7 +215,6 @@ export const updateProduct = async (id: number, request: NextRequest) => {
         where: { id },
         data: {
             name,
-            slug,
             color,
             price,
             quantity: quantity || null,
