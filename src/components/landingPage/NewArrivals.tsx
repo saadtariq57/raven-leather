@@ -1,4 +1,5 @@
-"use client"; // This is a Client Component
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { ProductWithImagesAndSizes } from "@/types/client/product.types";
 import Autoplay from "embla-carousel-autoplay";
@@ -25,29 +26,33 @@ export default function NewArrivals({ newArrivals }: NewArrivalsProps) {
         opts={{ align: "start" }}
         plugins={[Autoplay({ delay: 5000 })]}
       >
-        <CarouselContent className="flex gap-4">
+        <CarouselContent className="flex md:gap-4 gap-2">
           {newArrivals.map((product, index) => (
             <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
-              <Card className="overflow-hidden bg-[#F3F3F3] w-[45vw] md:w-auto">
-                <Link href={`/category/${product.category}s/${product.slug}`}>
-                <CardContent className="p-0">
-                  <div className="md:h-[60%] xl:h-[70%] bg-white">
-                    <Image
-                      src={product.images[0].url}
-                      alt={product.name}
-                      className="xl:w-full object-cover mb-2"
-                      width={600}
-                      height={400}
-                      loading="lazy"
+              <Card className="overflow-hidden bg-[#F3F3F3] w-full h-[290px] md:h-[320px] lg:h-[370px] xl:h-[470px] ">
+                <Link href={`/category/${product.category}s/${product.slug}`} className="h-full">
+                  <CardContent className="p-0 flex flex-col h-full">
+                    <div className="w-full bg-white overflow-hidden aspect-square md:aspect-[4/5]">
+                      <Image
+                        src={product.images[0].url}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                        width={600}
+                        height={400}
+                        loading="lazy"
                       />
-                  </div>
-                  <h3 className={`md:text-base text-sm font-semibold ml-3 mr-1 ${inter.className}`}>{product.name}</h3>
-                  <p className="md:text-sm text-xs text-gray-500 ml-3">{product.color}</p>
-                  <p className={`text-lg font-semibold ${inter.className} mt-2 ml-3 mb-3`}>
-                    Rs. {Number(product.price).toLocaleString("en-PK")}
-                  </p>
-                </CardContent>
-                      </Link>
+                    </div>
+                    <div className="flex flex-col p-2 md:p-3">
+                      <div className="h-[40px] md:h-[48px] mb-1">
+                        <h3 className={`text-sm md:text-base font-semibold line-clamp-2 ${inter.className}`}>{product.name}</h3>
+                      </div>
+                      <p className="text-xs text-gray-500">{product.color}</p>
+                      <p className={`text-base md:text-lg font-semibold ${inter.className}`}>
+                        Rs. {Number(product.price).toLocaleString("en-PK")}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Link>
               </Card>
             </CarouselItem>
           ))}
