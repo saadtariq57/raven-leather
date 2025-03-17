@@ -2,7 +2,7 @@
 import { Inter } from "next/font/google";
 const inter = Inter({
   weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],     
+  subsets: ['latin'],
   style: ['normal', 'italic'],
 });
 
@@ -30,9 +30,10 @@ export default function Jackets() {
   useEffect(() => {
     async function fetchJackets() {
       try {
-        const response = await axios.get<{ products: ProductWithImagesAndSizes[] }>("/api/admin/product/get/jackets");        
+        const response = await axios.get<{ products: ProductWithImagesAndSizes[] }>("/api/admin/product/get/jackets");
         setJackets(response.data.products);
-      } catch (error) {
+      } catch (error: any) {
+        console.error("Error occurred while fetching bags: ", error.message);
       } finally {
         setIsLoading(false);
       }
@@ -86,7 +87,7 @@ export default function Jackets() {
                 <DeleteProductDialog productId={jackets[selectedRows[0]].id} />
               </div>
             </div>
-          )}  
+          )}
           {/* Table or Loading / No Bag Found */}
           {isLoading ? (
             <div className="flex items-center justify-center h-full text-gray-500 text-lg">
@@ -96,7 +97,7 @@ export default function Jackets() {
             <div className="flex items-center justify-center h-full text-gray-500 text-lg">
               No jackets found.
             </div>
-            
+
           ) : (
             <div className="border rounded-lg overflow-y-auto max-h-[70vh]">
               <Table>
@@ -116,38 +117,38 @@ export default function Jackets() {
                 {/* Table Body */}
                 <TableBody>
                   {jackets.map((jacket, index) => {
-                      const totalQuantity = jacket.sizes.reduce((sum, size) => sum + size.quantity, 0);
+                    const totalQuantity = jacket.sizes.reduce((sum, size) => sum + size.quantity, 0);
 
                     return (
-                    <TableRow key={index} className="hover:bg-gray-100">
-                      {/* Checkbox */}
-                      <TableCell className="text-center">
-                        <Checkbox
-                          checked={isRowSelected(index)}
-                          onCheckedChange={() => toggleRow(index)}
-                          className="cursor-pointer w-4 h-4"
-                        />
-                      </TableCell>
+                      <TableRow key={index} className="hover:bg-gray-100">
+                        {/* Checkbox */}
+                        <TableCell className="text-center">
+                          <Checkbox
+                            checked={isRowSelected(index)}
+                            onCheckedChange={() => toggleRow(index)}
+                            className="cursor-pointer w-4 h-4"
+                          />
+                        </TableCell>
 
-                      {/* Product Information */}
-                      <TableCell className="flex items-center gap-3">
-                        <Image
-                          src={jacket.images[0].url}
-                          alt={jacket.name}
-                          width={30}
-                          height={30}
-                          className="rounded-md"
-                        />
-                        <div>
-                          <div className="font-medium">{jacket.name}</div>
-                          <div className="text-gray-500 text-sm">{jacket.color}</div>
-                        </div>
-                      </TableCell>
-                      <TableCell>{jacket.price}</TableCell>
-                      <TableCell>{totalQuantity}</TableCell>
-                      <TableCell className="text-gray-500">{jacket.status ? "Active" : "Inactive"}</TableCell>
-                    </TableRow>
-                  )
+                        {/* Product Information */}
+                        <TableCell className="flex items-center gap-3">
+                          <Image
+                            src={jacket.images[0].url}
+                            alt={jacket.name}
+                            width={30}
+                            height={30}
+                            className="rounded-md"
+                          />
+                          <div>
+                            <div className="font-medium">{jacket.name}</div>
+                            <div className="text-gray-500 text-sm">{jacket.color}</div>
+                          </div>
+                        </TableCell>
+                        <TableCell>{jacket.price}</TableCell>
+                        <TableCell>{totalQuantity}</TableCell>
+                        <TableCell className="text-gray-500">{jacket.status ? "Active" : "Inactive"}</TableCell>
+                      </TableRow>
+                    )
                   })}
                 </TableBody>
               </Table>
