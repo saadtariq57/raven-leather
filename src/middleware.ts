@@ -11,11 +11,8 @@ export default async function middleware(req: NextRequest) {
     const session = await auth();
 
     const token = req.cookies.get("__Secure-authjs.session-token" )?.value || req.cookies.get("authjs.session-token")?.value;
-    // console.log("Token in middleware: ", token);
 
     const session_id = req.cookies.get("session_id")?.value;
-
-    // console.log("Authjs session in middleware: ", authjs_session);
 
     const url = req.nextUrl.clone();
 
@@ -26,7 +23,6 @@ export default async function middleware(req: NextRequest) {
 
 
     if (!session_id && !token) {
-        console.log("### Not Guest not Auth User");
         // If it's an API or admin route and the user is not logged in, redirect to admin signin
         if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin')) {
             url.pathname = '/admin/signin';
@@ -47,7 +43,6 @@ export default async function middleware(req: NextRequest) {
 
     // If the user is not signed in, handle the guest session middleware
     if (session_id && !token) {
-        console.log("### Guest User");
 
         // If it's a cart API route, apply guestMiddleware
         if (url.pathname.startsWith('/cart') || url.pathname.startsWith('/api/cart')) {
@@ -56,7 +51,6 @@ export default async function middleware(req: NextRequest) {
 
         // If it's an order API route, apply guestMiddleware
         if (url.pathname.startsWith('/order') || url.pathname.startsWith('/api/order')) {
-            console.log("$Inside /order");
             return guestMiddleware(req);
         }
 
@@ -75,9 +69,6 @@ export default async function middleware(req: NextRequest) {
 
     if (token) {
         const sessionIdDeleted = (await cookieStore).delete("session_id");
-        console.log("session_id deleted: ", sessionIdDeleted);
-
-        console.log("### Auth User");
         
         // If the user is authenticated and trying to access an admin route, proceed with admin middleware
         if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin')) {

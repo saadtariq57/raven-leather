@@ -5,10 +5,8 @@ import { NextRequest, NextResponse } from "next/server"
 export async function GET(request: NextRequest) {
     try {
         const session = await auth();
-        console.log("auth Session in route: ", session);        
 
         const userIdFromSession = Number(session?.user?.id);
-        console.log("userIdFromSession: ", userIdFromSession);
 
         const userId = Number(request.nextUrl.searchParams.get("userId")); 
         

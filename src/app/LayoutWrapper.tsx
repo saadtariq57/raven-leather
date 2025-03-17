@@ -13,10 +13,8 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     const fetchCartCount = async () => {
       try {
         const response = await axios.get('/api/cart/get-itemsCount');
-        console.log("Response from get-itemsCount:", response.data);
         
         if (response.data.success) {
-          console.log("Cart items count in Layout Wrapper:", response.data.cartItemsCount);
           
           setCartCountState(response.data.cartItemsCount);
         } else {

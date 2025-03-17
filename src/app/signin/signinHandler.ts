@@ -22,7 +22,6 @@ export default async function signinHandler(values: z.infer<typeof formSchema>){
 
     if(user?.isVerified === true){
         const response = await signIn("credentials", { type: "user", email, password, redirect: false });
-        console.log("response in signinHandler: ", response);
         return response;
         
     }

@@ -44,7 +44,6 @@ export default function Signup() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
             setIsSubmitting(true);
-            console.log(values)
             const response = await signinHandler(values);
             if (response) {
                 window.location.href = "/";

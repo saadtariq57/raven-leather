@@ -52,9 +52,6 @@ export default function CheckoutCart({ cartItems, address }: CartProps) {
     const searchParams = new URLSearchParams(window.location.search);
     const itemsPath = searchParams.toString();
 
-    
-    console.log("cartItems: ", cartItems);
-
     //* Calculate the order summary.
     const subtotal = cartItems.reduce((acc, item) => {
         const price = Number(item.product.price);
@@ -104,12 +101,10 @@ export default function CheckoutCart({ cartItems, address }: CartProps) {
                 const orderItems = JSON.stringify(items);
                 localStorage.setItem("orderItems", orderItems);
 
-                console.log("Saved to local storage: User");
             }
 
             if (session.status === "unauthenticated") {
                 const isValid = await form.trigger();
-                console.log("Form Valid: ", isValid);
 
                 if (isValid) {
                     const formData = form.getValues();
@@ -131,8 +126,6 @@ export default function CheckoutCart({ cartItems, address }: CartProps) {
                     });
                     const orderItems = JSON.stringify(items);
                     localStorage.setItem("orderItems", orderItems);
-
-                    console.log("Saved to local storage: Guest");
                 }
             }
 

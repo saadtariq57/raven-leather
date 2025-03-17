@@ -28,7 +28,6 @@ export default function CompletedOrders() {
         async function fetchCustomers() {
             const response = await axios.get('/api/admin/customer/get/users');
             setCustomers(response.data.users);
-            console.log(response.data);
             setIsLoading(false);
         }
         fetchCustomers();

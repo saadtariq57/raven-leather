@@ -40,9 +40,7 @@ export default function Dashboard() {
         //Sales
         const salesResponse: any = await axios.get(`/api/admin/sales/stats/dashboard`);
         setTodaySales(salesResponse.data.today);
-        setMonthSales(salesResponse.data.month);
-        console.log("Sales: ", salesResponse.data);
-        
+        setMonthSales(salesResponse.data.month);        
 
         //Orders
         const todayOrdersResponse = await axios.get(`/api/admin/orders/stats/today`);

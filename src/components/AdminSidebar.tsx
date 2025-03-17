@@ -26,21 +26,19 @@ export default function AdminSidebar() {
   const [pendingOrderCount, setPendingOrderCount] = useState(0);
   const [adminUsername, setAdminUsername] = useState("");
   useEffect(() => {
-    async function fetchAdminUsername(){
+    async function fetchAdminUsername() {
       try {
         const response = await axios.get("/api/admin/getUsername");
         setAdminUsername(response.data.username);
       } catch (error) {
-        console.log(error);
       }
     }
     fetchAdminUsername();
 
-    async function fetchPendingOrderCount(){
+    async function fetchPendingOrderCount() {
       try {
         const response = await axios.get("/api/admin/orders/get/pendingOrderCount");
         setPendingOrderCount(response.data.orderCount);
-        console.log("response: ", response.data);
       } catch (error) {
         console.log(error);
       }
@@ -48,7 +46,7 @@ export default function AdminSidebar() {
     fetchPendingOrderCount();
 
   }, [])
-  
+
   return (
     <div className={`w-52 h-screen bg-black text-white flex flex-col ${inter.className} `}>
       {/* Logo */}
@@ -58,10 +56,10 @@ export default function AdminSidebar() {
       <div className="flex flex-col space-y-1 mb-auto text-sm">
         {/* Dashboard */}
         <Link href="/admin/dashboard">
-        <div className="pl-4 flex items-center gap-3 cursor-pointer hover:bg-[#292828] py-2 transition duration-100">
-          <Image src="/assets/dashboard.png" width={50} height={50} className="w-5 h-5" alt="Dashboard" />
-          <span>Dashboard</span>
-        </div>
+          <div className="pl-4 flex items-center gap-3 cursor-pointer hover:bg-[#292828] py-2 transition duration-100">
+            <Image src="/assets/dashboard.png" width={50} height={50} className="w-5 h-5" alt="Dashboard" />
+            <span>Dashboard</span>
+          </div>
         </Link>
 
         {/* Products Dropdown */}
@@ -111,10 +109,10 @@ export default function AdminSidebar() {
 
         {/* Sales */}
         <Link href="/admin/sales">
-        <div className="pl-4 flex items-center gap-3 cursor-pointer hover:bg-[#292828] py-2 transition duration-100">
-          <Image src="/assets/sales.png" width={50} height={50} className="w-5 h-5" alt="Sales" />
-          <span>Sales</span>
-        </div>
+          <div className="pl-4 flex items-center gap-3 cursor-pointer hover:bg-[#292828] py-2 transition duration-100">
+            <Image src="/assets/sales.png" width={50} height={50} className="w-5 h-5" alt="Sales" />
+            <span>Sales</span>
+          </div>
         </Link>
       </div>
 

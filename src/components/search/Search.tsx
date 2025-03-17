@@ -41,7 +41,6 @@ export default function Search() {
       try {
         const res = await fetch(`/api/search?query=${searchQuery}`);
         const data = await res.json();
-        console.log("Search results:", data);
         setResults(data.searchResult);
       } catch (error) {
         console.error("Error fetching products:", error);

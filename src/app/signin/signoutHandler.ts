@@ -7,7 +7,6 @@ export default async function signOutHandler() {
         await signOut();
         redirect(`/admin/signin`)
     } catch (error) {
-        console.log("Sign out error: ", error);
     }
 
 }

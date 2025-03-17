@@ -12,7 +12,6 @@ export const uploadFile_to_Cloudinary = async (filePath: string) => {
     try {
         const fileUploaded = await cloudinary.uploader.upload(filePath, { resource_type: "auto" });
         if (fileUploaded) {
-            console.log("File uploaded on cloudinary.");
             fs.unlinkSync(filePath);
             return fileUploaded;
         }
@@ -45,7 +44,6 @@ export async function deleteFile_from_Cloudinary(publicId: string) {
     try {
         const imageDeleted = await cloudinary.uploader.destroy(publicId)
         if (imageDeleted) {
-            console.log("File deleted from cloudinary.");
             return imageDeleted;
         }
 

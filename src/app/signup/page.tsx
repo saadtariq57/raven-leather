@@ -52,11 +52,9 @@ export default function Signup() {
             setIsSubmitting(true);
             // Do something with the form values.
             // ✅ This will be type-safe and validated.
-            console.log(values);
 
             const response = await signupHandler(values);
             if (response) {
-                console.log("redirectUrl: ", response.redirectUrl);
                 router.push(response.redirectUrl);
             }
         } catch (error: any) {

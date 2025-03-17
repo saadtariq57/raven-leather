@@ -3,7 +3,6 @@ import { nanoid } from "nanoid";
 
 export async function guestMiddleware(request: NextRequest) {
   const session_id = request.cookies.get("session_id")?.value;
-  // console.log("session_id in guest middleware: " + session_id);
 
   if (!session_id) {    
     const newSessionId = nanoid();

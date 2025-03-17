@@ -19,10 +19,8 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
     const data = await auth();
     
     const address = await getUserAddress(Number(data?.user.id));
-    console.log("address: ", address);
     
     const items = searchParams.items?.toString();
-    console.log("items: ", items);
     const productId = Number(searchParams.productId);
     const productQuantity = Number(searchParams.productQuantity);
     const productSize = searchParams.productSize ? String(searchParams.productSize) : "";
@@ -31,7 +29,6 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
         //Handle order from Cart
         const itemIds = items ? items.split(" ") : [];
         const idsArray = itemIds.map((id) => parseInt(id));
-        console.log(idsArray);
         const cartItems = await getCartItemsByIds(idsArray);
 
         return (
@@ -42,7 +39,6 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
     } else if(productId){
         // Handle order from Buy Now
         const product: ProductWithImagesAndSizes = await getProductDirect(productId);
-        console.log("product: ", product);
 
         return (
             <>

@@ -32,7 +32,6 @@ export default async function signupHandler(values: z.infer<typeof formSchema>){
         const OTPExpiry = new Date(Date.now() + 3600000);
 
         const emailSent = await SendVerificationEmail(email, OTP);
-        console.log("emailSent: ", emailSent?.response.status);
 
         if(emailSent){
             //Creating new User 
@@ -52,7 +51,6 @@ export default async function signupHandler(values: z.infer<typeof formSchema>){
         }
         
     } catch (error: any) {
-        console.log("Error while signup:", error.message);
         throw new Error("Error while signing up. " + error.message);
     }
 }

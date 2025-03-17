@@ -13,7 +13,6 @@ export async function createOrder(request: NextRequest) {
   const countryRegion = formData.get("countryRegion") as string;
   const paymentStatus = formData.get("paymentStatus") as string;
   const totalAmount = Number(formData.get("totalAmount") as string);
-  console.log("$Total Amount: " + totalAmount);
   
   const user_id = formData.get("user_id")
     ? Number(formData.get("user_id") as string)
@@ -25,15 +24,12 @@ export async function createOrder(request: NextRequest) {
     size: string;
     quantity: number;
   }[];
-  console.log("Parsed items: " + orderItems);
-  console.log("Array: " + Array.isArray(orderItems));
 
   //* Calculating total quantity of items, it will be used to track sales
   const totalQuantity = orderItems.reduce(
     (acc, item) => acc + item.quantity,
     0
   );
-  console.log("Total Quantity: " + totalQuantity);
 
   //* Creating new order
   const newOrder = await prisma.order.create({

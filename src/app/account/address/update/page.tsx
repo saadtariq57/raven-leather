@@ -73,18 +73,15 @@ export default function UpdateAddressPage() {
 
   const onSubmit = async (values: z.infer<typeof addressSchema>) => {
     setIsSubmitting(true);
-    console.log("Form Submitted: ", values);
     const user_id = Number(data?.user?.id);
     const addressData = { ...values, user_id }
 
     try {
       const response = await axios.post(`/api/user/address/update?userId=${user_id}`, addressData);
-      console.log("response: ", response.data);
 
       if (response.data.success) {
         const searchParams = new URLSearchParams(window.location.search);
         const redirectPath = searchParams.get("redirect");
-        console.log("redirectPath: ", redirectPath);
         
         if (redirectPath) {
           router.push(redirectPath);
@@ -94,7 +91,6 @@ export default function UpdateAddressPage() {
       }
     } catch (error) {
       setIsSubmitting(false)
-      console.log("Error while submitting. ", error);
     }
 
   };

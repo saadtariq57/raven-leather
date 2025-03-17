@@ -31,7 +31,6 @@ export default function Belts() {
     async function fetchBelts() {
       try {
         const response = await axios.get<{ products: ProductWithImagesAndSizes[] }>("/api/admin/product/get/belts");
-        console.log("response: ", response.data);
         setBelts(response.data.products);
       } catch (error) {
         console.error(error);

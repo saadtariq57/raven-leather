@@ -10,7 +10,6 @@ import OrderByIdSkeleton from "./loading";
 export default function OrderConfirmationCard() {
     const searchParams = useSearchParams();
     const orderId = Number(searchParams.get("orderId"));
-    console.log("orderId", orderId);
 
     const [order, setOrder] = useState<OrderWithOrderItemsAndProduct | null>(null);
 

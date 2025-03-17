@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Session } from "next-auth";
 
-export async function addressMiddleware(request: NextRequest, session: Session) {
-    console.log("In addressMiddleware");    
-    
+export async function addressMiddleware(request: NextRequest, session: Session) {    
     const userId = request.nextUrl.searchParams.get("userId");
     
     if (session?.user.id === userId) {

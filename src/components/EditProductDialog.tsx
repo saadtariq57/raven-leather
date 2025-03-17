@@ -87,12 +87,10 @@ export default function EditProductDialog() {
       } else {
         formData.append(key, data[key]);
       }
-      console.log(data);
       
     });
 
     // You can now submit formData with files
-    console.log("Form Data:", formData);
     alert("Product added successfully!");
   };
 

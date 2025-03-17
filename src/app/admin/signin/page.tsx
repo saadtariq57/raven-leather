@@ -39,7 +39,6 @@ export default function AdminSignin() {
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSigningIn(true);
-        console.log(values)
         const response = await adminSigninHandler(values);
         if(response){
             redirect("/admin/dashboard");

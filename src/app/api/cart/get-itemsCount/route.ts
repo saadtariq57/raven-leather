@@ -9,7 +9,6 @@ export async function GET(request: NextRequest) {
 
         if (token) {
             // Handle authenticated user
-            console.log("Token: ", token);
             const data = await auth();
             if (data?.user) {
                 const cartItemsCount = await getUserCartItemsCount(Number(data.user.id));
@@ -24,9 +23,7 @@ export async function GET(request: NextRequest) {
         }
 
         if (session_id && !token) {
-            // Handle guest user
-            console.log("session_id: ", session_id);
-            
+            // Handle guest user            
             const cartItemsCount = await getGuestCartItemsCount(session_id);
 
             return NextResponse.json({

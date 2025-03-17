@@ -1,14 +1,4 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-  
-//   images: {
-//     domains: ["res.cloudinary.com"], // ✅ Add Cloudinary's domain here
-//   },
-// };
 
-// module.exports = nextConfig;
-
-// next.config.ts
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {

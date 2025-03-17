@@ -30,12 +30,9 @@ export default function Jackets() {
   useEffect(() => {
     async function fetchJackets() {
       try {
-        const response = await axios.get<{ products: ProductWithImagesAndSizes[] }>("/api/admin/product/get/jackets");
-        console.log("response: ", response.data);
-        
+        const response = await axios.get<{ products: ProductWithImagesAndSizes[] }>("/api/admin/product/get/jackets");        
         setJackets(response.data.products);
       } catch (error) {
-        console.error(error);
       } finally {
         setIsLoading(false);
       }

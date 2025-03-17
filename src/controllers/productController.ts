@@ -25,7 +25,6 @@ export const createProduct = async (request: NextRequest) => {
                 const buffer = Buffer.from(fileBuffer);
 
                 // Upload to Cloudinary
-                console.log(`Uploading image: ${imageFile.name}`);
                 const imageUploaded = await uploadStream_to_Cloudinary(buffer)
                 return imageUploaded;
             })
@@ -144,11 +143,6 @@ export const updateProduct = async (id: number, request: NextRequest) => {
         return NextResponse.json({ success: false, message: "Product not found." }, { status: 404 });
     }
 
-    // let slug = existingProduct.slug;
-    // if (name !== existingProduct.name) {
-    //     slug = generateSlug(name, id); // Update slug if name changes
-    // }
-
     // Handle Image Updates
     if (imageFiles && imageFiles.length > 0) {
         // Upload new images
@@ -159,7 +153,6 @@ export const updateProduct = async (id: number, request: NextRequest) => {
                 const buffer = Buffer.from(fileBuffer);
 
                 // Upload to Cloudinary
-                console.log(`Uploading image: ${imageFile.name}`);
                 const imageUploaded = await uploadStream_to_Cloudinary(buffer)
                 return imageUploaded;
             })

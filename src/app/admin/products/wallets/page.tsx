@@ -30,7 +30,6 @@ export default function Belts() {
     async function fetchWallets() {
       try {
         const response = await axios.get<{ products: ProductWithImagesAndSizes[] }>("/api/admin/product/get/wallets");
-        console.log("response: ", response.data);
         setWallets(response.data.products);
       } catch (error) {
         console.error(error);

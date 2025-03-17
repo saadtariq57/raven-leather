@@ -85,7 +85,6 @@ export default function AddBeltDialog() {
 
   const onSubmit = async (data: any) => {
     setIsAdding(true);
-    console.log("Raw Form Data:", data); // Debugging step
 
     const formData = new FormData();
 
@@ -109,7 +108,6 @@ export default function AddBeltDialog() {
 
     try {
       const response = await axios.post("/api/admin/product/add-product", formData)
-      console.log("Response:", response.data);
       if (response.data.success) {
         setIsAdding(false);
         setOpen(false);

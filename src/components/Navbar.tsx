@@ -15,9 +15,7 @@ const newsreader = Newsreader({
 });
 
 export default function Navbar() {
-    const { cartItemsCount } = useCart();
-    console.log("Cart items count:", cartItemsCount);
-    
+    const { cartItemsCount } = useCart();    
 
     return (
         <div className="sticky top-0 z-50 bg-white shadow-sm">

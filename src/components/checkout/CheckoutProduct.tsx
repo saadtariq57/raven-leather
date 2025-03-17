@@ -55,18 +55,11 @@ export default function CheckoutProduct({ product, productQuantity, productSize,
     const searchParams = new URLSearchParams(window.location.search);
     const productPath = searchParams.toString();
 
-    console.log("productPath: ", productPath);
-
     //* Calculate the order summary.
     const subtotal = Number(product.price) * productQuantity;
 
     const shipping = 200;
     const total = subtotal + shipping;
-
-    console.log("productQuantity: ", productQuantity);
-
-    console.log("subtotal: ", subtotal);
-    console.log("total: ", total);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const form = useForm({
@@ -103,10 +96,8 @@ export default function CheckoutProduct({ product, productQuantity, productSize,
                 }]
 
                 const orderItems = JSON.stringify(item);
-                console.log("orderItems: ", orderItems);
                 localStorage.setItem("orderItems", orderItems);
 
-                console.log("Saved to local storage: User");
             }
 
             if (session.status === "unauthenticated") {
@@ -132,10 +123,7 @@ export default function CheckoutProduct({ product, productQuantity, productSize,
                     }]
 
                     const orderItems = JSON.stringify(item);
-                    console.log("orderItems: ", orderItems);
                     localStorage.setItem("orderItems", orderItems);
-
-                    console.log("Saved to local storage: Guest");
                 }
             }
 

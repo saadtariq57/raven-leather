@@ -25,7 +25,6 @@ export default function DeleteProductDialog({ productId }: { productId: number }
     try {
       const response = await axios.post(`/api/admin/product/delete-product?id=${productId}`);
       if (response.data.success) {
-        console.log("Response: " + response.data);
         
         window.location.reload();
       } else {

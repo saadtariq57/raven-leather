@@ -29,8 +29,6 @@ export async function GET(request: Request) {
       take: limit,
       orderBy: orderByClause,
     });
-
-    console.log("Fetched Jackets:", products);
     
 
     return NextResponse.json(

@@ -26,7 +26,6 @@ export default function CancelOrderAlertDialog({ orderId }: { orderId: number })
         orderStatus: "cancelled",
       }
       const response = await axios.post('/api/admin/orders/change-orderStatus', data);
-      console.log("response: ", response.data);
       if (response.data.success) {
         setIsCancelling(false);
         window.location.reload();

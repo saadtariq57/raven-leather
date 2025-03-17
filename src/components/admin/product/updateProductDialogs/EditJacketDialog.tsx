@@ -114,7 +114,6 @@ export default function EditJacketDialog({ productId }: { productId: number }) {
           `/api/admin/product/get-product?id=${productId}`
         );
         const productData = response.data.product;
-        console.log("productData: ", productData);
         
         setProduct(productData);
 
@@ -160,7 +159,6 @@ export default function EditJacketDialog({ productId }: { productId: number }) {
 
   const onSubmit = async (data: any) => {
     setIsUpdating(true);
-    console.log("Raw Form Data:", data); // Debugging step
 
     const formData = new FormData();
 
@@ -216,15 +214,12 @@ export default function EditJacketDialog({ productId }: { productId: number }) {
     ];
     formData.append("sizes", JSON.stringify(sizesArray));
 
-    // Print all form data
-    console.log("FormData images:", formData.getAll("images"));
-
     // Send formData to API
     const response = await axios.post(
       `/api/admin/product/update-product?id=${product?.id}`,
       formData
     );
-    console.log("Response:", response.data);
+    
     if (response.data.success) {
       setIsUpdating(false)
       setOpen(false);

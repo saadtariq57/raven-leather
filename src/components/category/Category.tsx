@@ -70,7 +70,6 @@ export default function Category({ initialProducts, category, categoryName }: Pr
         );
         const data = await res.json();
         if (data.products && data.products.length > 0) {
-          console.log("Sorted Products:", data.products);
           
           setProducts(data.products);
           setHasMore(data.products.length === 20);

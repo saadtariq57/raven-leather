@@ -100,7 +100,6 @@ export default function AddJacketDialog() {
 
   const onSubmit = async (data: any) => {
     setIsAdding(true);
-    console.log("Raw Form Data:", data); // Debugging step
 
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
@@ -134,7 +133,6 @@ export default function AddJacketDialog() {
     // Send formData to API
     try {
       const response = await axios.post("/api/admin/product/add-product", formData)
-      console.log("Response:", response.data);
       if (response.data.success) {
         setIsAdding(false);
         setOpen(false);

@@ -57,30 +57,23 @@ export default function PaymentSelection() {
             formData.append("totalAmount", totalAmount.toString());
             formData.append("paymentStatus", selectedOption === "card" ? "PAID" : "COD");
             formData.append("user_id", user_id || "");
-            console.log("paymentMethod", selectedOption.toString());
 
             //Creating order
             const response = await axios.post('/api/order/create-order', formData);
-            console.log("response.data:", response.data);
             if (response.data.success) {
                 //Deleting cart items
                 const cartItemsIds = JSON.parse(localStorage.getItem("cartItemsIds") || "[]");
-                console.log("cartItemsIds from localStorage", cartItemsIds);
 
                 if (cartItemsIds.length > 0) {
                     const cartItemsDeleted = await axios.post('/api/cart/deleteMany', { cartItemsIds });
-                    console.log("cartItemsDeleted", cartItemsDeleted.data);
                 }
                 localStorage.clear();
                 router.replace(`/order-confirmed?orderId=${response.data.newOrder.id}`)
-
-                // window.location.href = `/order-confirmed?orderId=${response.data.newOrder.id}`;
 
             }
 
         } catch (error: any) {
             setIsSubmitting(false);
-            console.log("Error while submitting order:", error.message);
         }
     }
 

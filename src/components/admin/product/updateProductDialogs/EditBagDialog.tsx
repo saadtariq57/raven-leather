@@ -141,7 +141,6 @@ export default function EditBagDialog({ productId }: { productId: number }) {
   //* Handle form submission
   const onSubmit = async (data: any) => {
     setIsUpdating(true);
-    console.log("Raw Form Data:", data); // Debugging step
     const formData = new FormData();
 
     // Process images: if originFileObj exists, use it. If not, create a new File from the URL.
@@ -191,7 +190,7 @@ export default function EditBagDialog({ productId }: { productId: number }) {
       `/api/admin/product/update-product?id=${product?.id}`,
       formData
     );
-    console.log("Response:", response.data);
+    
     if (response.data.success) {
       setIsUpdating(false)
       setOpen(false);

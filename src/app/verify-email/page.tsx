@@ -22,7 +22,6 @@ const EmailVerificationPage = () => {
 
   //? If the user is coming from forgot password page, we will redirect them to reset password page
   const isForgotPassword = searchParams.get('forgotPassword') === "true";
-  console.log("isForgotPassword: ", isForgotPassword);
 
   const handleSubmit = async () => {
     try {

@@ -34,7 +34,6 @@ export default function Sales() {
       setAllTimeSales(response.data.allTime)
       setAllSalesRecords(response.data.allSalesRecords)
       setIsLoading(false);
-      console.log(response.data);
     }
     fetchSalesDetails();
   }, [])

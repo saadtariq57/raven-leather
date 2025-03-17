@@ -31,7 +31,6 @@ export default function Bags() {
     async function fetchBags() {
       try {
         const response = await axios.get<{ products: ProductWithImagesAndSizes[] }>("/api/admin/product/get/bags");
-        console.log("response: ", response.data);
         setBags(response.data.products);
       } catch (error) {
         console.error(error);

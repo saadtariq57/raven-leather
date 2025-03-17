@@ -29,13 +29,11 @@ export default function AddressComponent({ form }: AddressComponentProps ) {
   const pathName = usePathname();
 
   const onSubmit = async (values: z.infer<typeof addressSchema>) => {
-    console.log("Form Submitted: ", values);
     const user_id = Number(data?.user?.id);
     const addressData = {...values, user_id}    
 
     try {
       const response = await axios.post("/api/user/address/create", addressData);
-      console.log("response: ", response.data);
       
       if(response.data.success){
         const searchParams = new URLSearchParams(window.location.search);

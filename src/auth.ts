@@ -127,8 +127,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: async ({ user, account }) => {
 
       if (account?.provider === "google") {
-        console.log("user signed with google: ", user);
-
         try {
           const { id, email, name } = user;
           let dbUser = await prisma.user.findUnique({
@@ -136,7 +134,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               email: String(email)
             }
           })
-          console.log("userExist: ", dbUser);
 
           if (!dbUser) {
             dbUser = await prisma.user.create({
@@ -147,7 +144,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 isVerified: true
               }
             })
-            console.log("New user created: ", dbUser);
           }
 
           //? As google OAuth session will have googleId as userId, so we need to set it to dbUser id for consistency with Credential signIn.
@@ -161,7 +157,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
 
       if (account?.provider === "credentials") {
-        console.log("user signed with credentials: ", user);
         return true
       }
 

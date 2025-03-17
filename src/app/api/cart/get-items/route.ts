@@ -11,8 +11,6 @@ export async function GET(request: NextRequest) {
         const token = request.cookies.get("__Secure-authjs.session-token" )?.value || request.cookies.get("authjs.session-token")?.value;
 
         const cookies = request.cookies.getAll();
-        console.log("Cookies in cart item route: ", cookies);
-        console.log("Token in cart item route: ", token);
 
         if (token) {
             // Handle authenticated user
@@ -30,9 +28,7 @@ export async function GET(request: NextRequest) {
         }
 
         if (session_id && !token) {
-            // Handle guest user
-            console.log("session_id: ", session_id);
-            
+            // Handle guest user            
             const cartItems = await getGuestCartItems(session_id);
 
             return NextResponse.json({

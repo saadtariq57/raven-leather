@@ -5,7 +5,6 @@ export async function GET(request: NextRequest) {
     try {
         // Get the slug from the query params
         const slug = request.nextUrl.searchParams.get("slug")?.toString();
-        console.log("Slug: ", slug);
         
 
         // Check if the slug is valid (non-null and non-empty)

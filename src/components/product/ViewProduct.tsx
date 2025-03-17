@@ -33,8 +33,6 @@ export default function ViewProduct({ product }: { product: ProductWithImagesAnd
     const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0]?.size || "");
     const router = useRouter();
     const { setCartItemsCount } = useCart();
-
-    console.log("Product sizes: ", product.sizes);
     
     const incrementQuantity = () => {
         setQuantity(quantity + 1);
@@ -95,7 +93,6 @@ export default function ViewProduct({ product }: { product: ProductWithImagesAnd
     const buyNow = async () => {
         setIsBuying(true);
         try {
-            console.log("size: ", selectedSize);
             if(selectedSize === ""){
                 router.push(`/cart/checkout?productId=${product.id}&productQuantity=${quantity}`);
             } else {

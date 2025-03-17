@@ -14,8 +14,6 @@ export default function PendingOrders() {
             const response = await axios.get('/api/admin/orders/get/completedOrders');
             setOrders(response.data.orders);
             setIsLoading(false);
-            console.log(response.data);
-
         }
         fetchOrderDetails();
     }, [])
