@@ -2,7 +2,7 @@
 
 Raven Leather Store is an ecommerce store for buying leather products like Jackets, Wallets, Belts, built using the Next.js, and some of the modern web development technologies.
 
-**Demo**: https://ravenleather.vercel.app
+**Live Demo**: https://ravenleather.vercel.app
 
 ## Technologies Used:
 - **Next.js with TypeScript** – Full-stack Framework
