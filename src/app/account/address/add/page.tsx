@@ -56,7 +56,8 @@ export default function AddAdressPage() {
         }
       }
       
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Error adding address:", error.message);
       setIsSubmitting(false)
     }
 

@@ -68,7 +68,8 @@ export default async function middleware(req: NextRequest) {
     }
 
     if (token) {
-        const sessionIdDeleted = (await cookieStore).delete("session_id");
+        (await cookieStore).delete("session_id"); // Delete session_id cookie when user logged in
+
         
         // If the user is authenticated and trying to access an admin route, proceed with admin middleware
         if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin')) {

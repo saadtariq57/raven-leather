@@ -89,7 +89,8 @@ export default function UpdateAddressPage() {
           router.push('/account');
         }
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Error updating address:", error.message);
       setIsSubmitting(false)
     }
 

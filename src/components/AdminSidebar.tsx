@@ -30,7 +30,8 @@ export default function AdminSidebar() {
       try {
         const response = await axios.get("/api/admin/getUsername");
         setAdminUsername(response.data.username);
-      } catch (error) {
+      } catch (error: any) {
+        console.error("Error fetching admin username:", error.message);
       }
     }
     fetchAdminUsername();

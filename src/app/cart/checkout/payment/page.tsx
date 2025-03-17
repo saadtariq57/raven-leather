@@ -65,7 +65,7 @@ export default function PaymentSelection() {
                 const cartItemsIds = JSON.parse(localStorage.getItem("cartItemsIds") || "[]");
 
                 if (cartItemsIds.length > 0) {
-                    const cartItemsDeleted = await axios.post('/api/cart/deleteMany', { cartItemsIds });
+                    await axios.post('/api/cart/deleteMany', { cartItemsIds });
                 }
                 localStorage.clear();
                 router.replace(`/order-confirmed?orderId=${response.data.newOrder.id}`)
@@ -74,6 +74,8 @@ export default function PaymentSelection() {
 
         } catch (error: any) {
             setIsSubmitting(false);
+            console.error("Error occurred while creating order. " + error.message);
+            
         }
     }
 
